@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/resources/chicken.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item logo"><a href="/">The Farm</a></li>
+            </ul>
+            </ul>
+        </nav>
+    </header>
+    <section class="signup-container">
+        <span class="container-title">
+            <hr>
+            <h1>SIGN UP</h1>
+            <hr>
+        </span>
+        <h2>Fill in the required data.</h2>
+        <form action="/signup" method="POST">
+            <span>
+                <h4>Full Name: </h4>
+                <input type="text" name="username" id="" placeholder="Full name" class="form-control" required>
+            </span>
+
+            <span>
+                <h4>Email: </h4>
+                <input type="email" name="email" id="" placeholder="Email" class="form-control">
+            </span>
+            <span>
+                <h4>Phone: </h4>
+                <input type="tel" name="phone-number" id="" placeholder="Phone number*" class="form-control" required>
+            </span>
+
+            <span>
+                <h4>Password: </h4>
+                <input type="password" name="password" id="" placeholder="Password" class="form-control" required>
+            </span>
+            <span>
+                <h4>Confirm password: </h4>
+                <input type="password" name="confirm-password" id="" placeholder="Confirm password" class="form-control" required>
+            </span>
+            <span>
+                <h4>Residence: </h4>
+                <input type="text" name="residence" id="" placeholder="Residence*" class="form-control" required>
+            </span>
+            {{message}}
+            <button class="btn"><a href="/signup">SIGN UP</a></button>
+        </form>
+    <small>Already have an account? <a href="/login">Login</a></small> <br>
+        <span> This site is protected by <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
+            apply.</span>
+    </section>
+    <footer>
+        <div class="sponsors">Lorem ipsum dolor sit amet consectetur. </div>
+        <span class="copyright"> Copyright&copy; Shammah 2021</span>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,163 @@
+@media all and (max-width: 1000px){
+    nav{
+        display: none;
+        align-items: center;
+        height: 40vh;
+        padding: 10px;
+        width: 100vw;
+        justify-content: space-between;
+        background-color: rgba(0,0,0, 0.8);
+    }
+    .nav-active{
+        display: flex;
+        flex-direction: column;
+    }
+    .burger{
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        padding: 10px;
+    }
+    .nav-list-active{
+        flex-direction: column;
+        height: 80%;
+        width: 100vw;
+    }
+    .nav-list li, .profile{
+        height: 25px;
+        font-size: 1.6rem;
+        font-weight: 1000;
+     }
+    header .active, header a:hover{
+        padding: 5px;
+        width: 100px;
+    }
+    .landing{
+        height: 20vh;
+    }
+    .landing-text h1{
+        font-size: 3rem;
+    }
+    .home-page{
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        height: 100vh;
+        }
+      .scroll-link{
+            display: none;
+        }
+    .home-image{
+        width: 100%;
+    }
+    .home-text{
+        width: 100%;
+        height: 40vh;
+        text-align: center;
+        padding-top: 5vh;
+    }
+    .home-text h2{
+        margin: 10px;
+    }
+    .landing-buttons{
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .landing-buttons button{
+        width: 150px;
+        font-size: 1rem;
+    }
+    .home-image{
+        margin-bottom: 100px;
+        height: 50vh;
+    }
+    .home-image img{
+        width: 100%;
+        height: 60%;
+    }
+    .container-title {
+        width: 90%;
+    }
+    .container-title h1{
+        padding: 10px;
+    }
+    .product-container{
+        padding-top: 20px;
+        height: 120vh;
+    }
+    .product{
+        height: 40%;
+        padding: 10px;
+        width: 90%;
+        flex-direction: column;
+        background-color: white;
+    }
+    .product-text{
+        width: auto;
+        height: 40%;
+        font-size: 1.2rem;
+    }
+    .about-img{
+        width: 100%;
+        height: 60%;
+    }
+    .reviews{
+        width: 100%;
+        grid-template-columns: 500px;
+        grid-template-rows: 100px 100px ;
+        grid-row-gap: 10px;
+        height: 80vh;
+        overflow: hidden;
+        margin: 10px;
+        padding: 10px;
+    }
+    .review{
+        height: 100px;
+    }
+   
+    .info-container{
+        width: 100%;
+        height: 60vh;  
+    }
+    .info-text{
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 5px;
+        height: 90%;
+    }
+    .info{
+        width: 90%;
+        height: 40%;
+        padding-left: 10px;
+    }
+    .info-meta{
+        flex-direction: column;
+        width: 90%;
+        height: 60%;
+    }
+    .contact-container hr{
+      width: 20%;
+    }
+    .form-control{
+        width: 80%;
+        margin: 10px;
+    }
+    .contact-container textarea{
+        width: 80%;
+    }
+    .contact-container span{
+        padding: 10px;
+    }
+    footer{
+        font-size: 1rem;
+    }
+    footer div{
+        width: 60%;
+        padding: 3px;
+    }
+}

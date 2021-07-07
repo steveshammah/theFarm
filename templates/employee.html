@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../static/resources/chicken.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/style.css"
+    >
+    <title>The Farm</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="nav-list">
+                <li class="nav-item"><a href="#">Explore</a></li>
+                <li class="nav-item logo"><a href="/">The Farm</a></li>
+                <li class="nav-item"><a href="/admin"> Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="navigation">
+        <ul class="user-nav">
+            <li><a href="/employee">Hello: {{email}}</a></li>
+            <li><a href="/management"> Brooder </a></li>
+            <li><a href="/management">Inventory</a></li>
+            <li><a href="/employee_login">Log Out</a></li>
+        </ul>
+    </div>
+
+    <section class="profile-container">
+        <div class="employee-details">
+            <span><h3>Full Name:</h3> {{employee_details[3]}}  {{employee_details[4]}}</span>
+            <span><h3>Email:</h3>{{employee_details[0]}}</span>
+            <span><h3>Phone:</h3>{{employee_details[5]}}</span>
+            <span><h3>Rights:</h3>{{employee_details[2]}}</span>
+            <span><h3>Password:</h3>{{employee_details[1][:30]}}</span>
+
+
+        </div>
+    </section>
