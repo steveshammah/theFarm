@@ -1,0 +1,90 @@
+/* Admin Panel*/
+.employees-container,
+.customers-container ,
+.orders-container{
+    height: 35vh;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  /* Health Centre */
+  .health-container,
+  .brooder-container {
+    height: 100vh;
+    width: 80vw;
+    display: flex;
+    /* background-color: green; */
+    justify-content: space-between;
+    margin: auto;
+  }
+  .health-updates,
+  .brooder-updates {
+    height: 80%;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 20px;
+    /* background-color: aqua; */
+    padding: 10px;
+    border: 1px solid black;
+  
+  }
+  .medicine-section,
+  .mortality,
+  .vaccination {
+    height: 400px;
+    width: 98%;
+    margin: auto;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+  }
+  .vaccination{
+      border-bottom: none;
+  }
+  .medicine-section form,
+  .mortality form,
+  .vaccination form {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-around;
+    /* background-color: yellow; */
+  }
+  input, select{
+      height: 25px;
+      padding: 10px;
+  }
+  .health-stats,
+  .brooder-stats {
+    /* background-color: red; */
+    width: 60%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  
+  /* Brooders*/
+  .feeds-section,
+  .feeds-usage,
+  .cleaning {
+      width: 98%;
+      margin: auto;
+    border-bottom: 1px solid black;
+    padding-bottom: 10px;
+  }
+  .cleaning{
+      border-bottom: none;
+  }
+  .feeds-section form,
+  .feeds-usage form,
+  .cleaning form {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: space-around;
+    /* background-color: yellow; */
+  }
+  

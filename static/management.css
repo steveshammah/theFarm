@@ -1,98 +1,3 @@
-/* Admin Panel*/
-.employees-container {
-  height: 90vh;
-  margin: 10px;
-  padding: 20px;
-  text-align: center;
-}
-.customers-container {
-  padding: 10px;
-  height: 100vh;
-}
-.orders-container {
-  padding: 10px;
-  height: 100vh;
-}
-/* Health Centre */
-.health-container,
-.brooder-container {
-  height: 100vh;
-  width: 80vw;
-  display: flex;
-  /* background-color: green; */
-  justify-content: space-between;
-  margin: auto;
-}
-.health-updates,
-.brooder-updates {
-  height: 80%;
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  padding: 20px;
-  /* background-color: aqua; */
-  padding: 10px;
-  border: 1px solid black;
-
-}
-.medicine-section,
-.mortality,
-.vaccination {
-  height: 400px;
-  width: 98%;
-  margin: auto;
-border-bottom: 1px solid black;
-padding-bottom: 10px;
-}
-.vaccination{
-    border-bottom: none;
-}
-.medicine-section form,
-.mortality form,
-.vaccination form {
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  justify-content: space-around;
-  /* background-color: yellow; */
-}
-input, select{
-    height: 25px;
-    padding: 10px;
-}
-.health-stats,
-.brooder-stats {
-  /* background-color: red; */
-  width: 60%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-
-/* Brooders*/
-.feeds-section,
-.feeds-usage,
-.cleaning {
-    width: 98%;
-    margin: auto;
-  border-bottom: 1px solid black;
-  padding-bottom: 10px;
-}
-.cleaning{
-    border-bottom: none;
-}
-.feeds-section form,
-.feeds-usage form,
-.cleaning form {
-  display: flex;
-  flex-direction: column;
-  /* align-items: center; */
-  justify-content: space-around;
-  /* background-color: yellow; */
-}
 
 /* Management */
 .management-container{
@@ -232,10 +137,23 @@ input, select{
     /* background-color: turquoise; */
 }
 .update-flock form{
-    width: 400px;
+    width: 500px;
+    height: 250px;
     display: flex;
     flex-direction: column;
-    background-color: black;
+    align-items: center;
+    justify-content: space-evenly;
+    /* background-color: black; */
+    border: 1px solid black;
+}
+.add-flock form input {
+    width: 300px;
+    margin: 10px;
+    height: 25px;
+}
+.add-flock form .btn {
+    background-color: #0f0;
+    color: black;
 }
 .flock-history{
     width: 90%;
