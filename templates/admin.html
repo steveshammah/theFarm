@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/management.css">
     <title>Admin Panel</title>
 </head>
 
@@ -18,15 +19,19 @@
             <ul class="nav-list">
                 <li class="nav-item"><a href="#">Explore</a></li>
                 <li class="nav-item logo"><a href="/">The Farm</a></li>
-                <li class="nav-item"><a href="/admin"> Admin</a></li>
+                <li class="nav-item"><a href="/admin"> Admin Panel</a></li>
             </ul>
         </nav>
     </header>
     <div class="navigation">
         <ul class="user-nav">
-            <li><a href="/management#brooder-container"> Brooder </a></li>
-            <li><a href="/management#inventory-container">Inventory</a></li>
-            <li><a href="/">Log Out</a></li>
+        <li><a href="/employee">Hello: {{email}}</a><div class="online"></div></li>
+            <li><a href="/employee/brooder"> Brooders </a></li>
+            <li><a href="/employee/health">Health Centre</a></li>
+            {% if 'admin' in email %}
+            <li><a href="/management">Brooder Management</a></li>
+            {% endif %}
+            <li><a href="/employee_login">Log Out</a></li>
         </ul>
     </div>
 
@@ -42,14 +47,15 @@
         <h2>Admin Panel</h2>
         <table>
             <tr>
-                <td>ID</td>
-                <td>Name</td>
-                </td>
-                <td>Phone</td>
-                <td>Email</td>
-                <td>Password</td>
-                <td>Rights</td>
-                <td>Date Joined</td>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Section</th>
+                <th>Rights</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Date Joined</th>
             </tr>
             {% for employee in employees %}
             <tr>
@@ -59,24 +65,27 @@
                 <td><a href="mailto:{{employee[3]}}">{{employee[3]}}</a></td>
                 <td>{{employee[7]}}</td>
                 <td>{{employee[5]}}</td>
-                <td>{{employee[6].strftime('%B %d, %Y')}}</td>
+                <td>{{employee[6][0:10]}}</td>
+                <td>{{employee[8]}}</td>
+                <td>{{employee[9].strftime('%d %b %Y')}}</td>
             </tr>
             {% endfor %}
 
             <tr class="new-employee">
                 <form action="/new-employee" method="POST">
-                    <td><input type="text" id="" name="employee-id" placeholder="Employee ID" class="form-control"
-                            disabled></td>
-                    <td><input type="text" id="" name="employee-name" placeholder="Name" class="form-control"></td>
-                    <td><input type="text" id="" name="employee-phone" placeholder="Phone" class="form-control"></td>
-                    <td><input type="text" id="" name="employee-email" placeholder="Email" class="form-control"
-                            disabled></td>
-                    <td><input type="text" id="" name="password" placeholder="theFarm123" class="form-control" disabled>
+                    <td><input type="text" id="" name="employee-id" placeholder="Employee ID" title="Auto Generated" disabled></td>
+                    <td><input type="text" id="" name="employee-name" placeholder="Name" ></td>
+                    <td><input type="text" id="" name="employee-phone" placeholder="Phone" ></td>
+                    <td><input type="text" id="" name="employee-email" placeholder="Email" disabled title="Auto Generated"></td>
+                    <td><input type="text" id="" name="section" placeholder="Section" >
                     </td>
                     <td><select name="rights" id="" class="btn">
-                            <option value="">Standard</option>
-                            <option value="">Sudo</option>
-                        </select></td>
+                        <option value="">Standard</option>
+                        <option value="">Sudo</option>
+                    </select></td>
+                    <td><input type="text" id="" name="password" placeholder="theFarm123" disabled title="Default Password"></td>
+                    <td><input type="text" id="" name="active" placeholder="active"  disabled title="Status"></td>
+           
                     <td><button class="btn">Add Employee</button></td>
                 </form>
             </tr>
@@ -87,15 +96,15 @@
         <h1>Customers</h1>
         <table>
             <tr>
-                <td>ID</td>
-                <td>Name</td>
-                </td>
-                <td>Phone</td>
-                <td>Email</td>
-                <td>Residence</td>
-                <td>Password</td>
-                <td>Date Joined</td>
-                <td>Orders</td>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Residence</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Date Joined</th>
+                <th>Orders Placed</th>
             </tr>
             {% for customer in customers %}
             <tr>
@@ -103,9 +112,10 @@
                 <td>{{customer[1]}} {{customer[2]}}</td>
                 <td>{{customer[4]}}</td>
                 <td><a href="mailto:{{customer[3]}}">{{customer[3]}}</a></td>
-                <td>{{customer[5]}}</td>
+                <td>{{customer[6]}}</td>
+                <td>{{customer[5][0:10]}}</td>
                 <td>{{customer[7]}}</td>
-                <td>{{customer[6].strftime('%B %d, %Y')}}</td>
+                <td>{{customer[8].strftime('%d %b %Y')}}</td>
             </tr>
             {% endfor %}
         </table>
@@ -116,12 +126,12 @@
         <h1>Orders</h1>
         <table>
             <tr>
-                <td>Order No.</td>
-                <td>Customer No.</td>
-                <td>Product Name</td>
-                <td>Count</td>
-                <td>Date</td>
-                <td>Status</td>
+                <th>Order No.</th>
+                <th>Customer No.</th>
+                <th>Product Name</th>
+                <th>Count</th>
+                <th>Date</th>
+                <th>Status</th>
             </tr>
  
             {% for order in orders %}

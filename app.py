@@ -21,21 +21,29 @@ def home():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     if request.method == 'POST':
-        fname, lname = request.form['username'].split(' ')[0], request.form['username'].split(' ')[1]
+        first_name, last_name = request.form['username'].split(' ')
         email = request.form['email']
         phone = request.form['phone-number']
         password = request.form['password']
         confirm_password = request.form['confirm-password']
         residence = request.form['residence']
         customer = User(email)
-        customer.sign_up(fname, lname, email, phone, residence, password, confirm_password)
-        if customer.sign_up(fname, lname, email, phone, residence, password, confirm_password) == True:
-            customer_details = customer.log_in(password)[1]
-            session['email'] = email
-            session['customer_id'] = customer_details[4]
-            return render_template('customer.html', customer_details=customer_details)
+        # print('Customer', customer)
+        if customer.verify_email(email):
+            customer.sign_up(first_name, last_name, email, phone, residence, password, confirm_password)
+            print('Creating User')
+            if customer.sign_up(first_name, last_name, email, phone, residence, password, confirm_password) == True:
+
+                customer_details = customer.log_in(password)
+                # print(customer_details)
+                session['email'] = email
+                session['customer_id'] = customer_details[4]
+                return render_template('customer.html', customer_details=customer_details)
+            else:
+                message = 'Passwords did not match'
+                return render_template('signup.html', message=message)
         else:
-            message = 'Passwords did not match'
+            message = 'Email has already been used!!'
             return render_template('signup.html', message=message)
     else:
         print('getting signup  template')
@@ -51,16 +59,18 @@ def employee_login():
     else:
         email = request.form['email']
         password = request.form['password']
-        print(f'Email: {email} & password: {password}')
+        # print(f'Email: {email} & password: {password}')
         employee = User(email)
         Admin(employee).log_in(password)
+        # print(Admin(employee).log_in(password), 'STATUS')
 
         if Admin(employee).log_in(password)[0] == True:
             # SUCCESSFULL LOGIN
-            employee_details = Admin(employee).log_in(password)[1]
+            employee_details = Admin(employee).log_in(password)
+            # print('EMPLOYEE DETAILS: ', employee_details)
             session['email'] = email
-            session['employee_id'] = employee_details[0][2]
-            print(session['employee_id'])
+            session['employee_id'] = employee_details[2]
+            # print('USER ID IN SESSION', session['employee_id'])
             # orders = Admin(email).orders_by_id(session['user_id'])
             return redirect('employee')
             # return render_template('employee.html', email=email, employee_details=employee_details[0], orders=orders)
@@ -77,34 +87,53 @@ def employee_login():
 @app.route('/admin')
 def admin():
     try:
-        email = session['email']
-        # employee_id = session['employee_id']
-        admin = Admin('admin@theFarm.co.ke')
+        admin_email = session['email']
+        admin_id = session['employee_id']
+        admin = Admin(admin_email)
         employees = admin.employee_table()
         customers = admin.customers_table()
         orders = admin.orders_table()
-        return render_template('admin.html', employees=employees, customers=customers, orders=orders, email=email)
+        return render_template('admin.html', employees=employees, customers=customers, orders=orders, email=admin_email)
     except KeyError:
         return redirect('employee_login')
 
 
-@app.route('/management')
+# Make use of URL
+@app.route('/management', methods=['GET', 'POST'])
 def management():
-    return render_template('management.html')
+    try:
+        if request.method == 'POST':
+            employee_id = session['employee_id']
+            return render_template('management.html')
+        else:
+            admin_email = session['email']
+            admin_id = session['employee_id']
+            admin = Admin(admin_email)
+            flock = admin.flock_table()
+            brooders = admin.brooders_table()
+            orders = admin.orders_table()
+            feedback = admin.feedback_table()
+            employees = admin.employee_table()
+            customers = admin.customers_table()
+            return render_template('management.html', flock=flock, brooders=brooders, orders=orders,
+                                   feedback=feedback, employees=employees, customers=customers, admin=admin)
+    except KeyError:
+        redirect(url_for('employee_login'))
 
 
 @app.route('/new-employee', methods=['POST'])
 def new_employee():
-    fname, lname = request.form['employee-name'].split(' ')[0], request.form['employee-name'].split(' ')[1]
+    first_name, last_name = request.form['employee-name'].split(' ')
     phone = request.form['employee-phone']
+    section = request.form['section']
     admin = request.form.get('rights')
-    print(admin)
+    # print(admin)
     if admin.upper() == 'sudo'.upper():
         rights = True
     else:
         rights = False
     user = User('admin@theFarm.coke')
-    Admin(user).create_employee(fname, lname, phone, rights)
+    Admin(user).create_employee(first_name, last_name, phone, rights, section)
     return redirect(url_for('admin'))
 
 
@@ -113,6 +142,7 @@ def employee():
     try:
         email = session['email']
         employee_id = session['employee_id']
+        # print('EMPLOYEE ID: ', employee_id)
         my_details = Admin(email).my_details(employee_id)
         orders = Admin(email).orders_by_id(employee_id)
         return render_template('employee.html', employee_details=my_details[0], email=email, orders=orders)
@@ -120,6 +150,34 @@ def employee():
         return redirect('employee_login')
 
 
+#  Health Specialist
+@app.route('/employee/health', methods=['POST', 'GET'])
+def health():
+    try:
+        employee_id = session['employee_id']
+
+        if request.method == 'GET':
+            return render_template('healthSpecialist.html')
+        else:
+            pass
+    except KeyError:
+        redirect(url_for('employee-login'))
+
+
+# Brooder Worker Section
+@app.route('/employee/brooder', methods=['POST', 'GET'])
+def brooder():
+    try:
+        employee_id = session['employee_id']
+
+        if request.method == 'GET':
+            return render_template('brooderWorker.html')
+        else:
+            pass
+    except KeyError:
+        redirect(url_for('employee-login'))
+
+# CUSTOMER SECTION
 @app.route('/login', methods=['GET', 'POST'])
 def customer_login():
     if request.method == 'GET':
@@ -129,7 +187,7 @@ def customer_login():
     else:
         email = request.form['email']
         password = request.form['password']
-        print(f'Email: {email} & password: {password}')
+        # print(f'Email: {email} & password: {password}')
         customer = User(email)
         if customer.log_in(password) == True:        # SUCCESSFUL LOGIN
             session['email'] = email
@@ -152,14 +210,24 @@ def customer():
     try:
         email = session['email']
         customer_details = User(email).user_details()[0]
-        session['customer_id'] = customer_details[0]            # SESSION USER ID SET
-        orders = Admin(email).orders_by_id(session['customer_id'])
-        chicks = Admin(email).sort_orders('chicks', session['customer_id'])
-        layers = Admin(email).sort_orders('layers', session['customer_id'])
-        cocks = Admin(email).sort_orders('cocks', session['customer_id'])
-        order_list = [chicks, layers, cocks]
-        print('ORDER LIST: ', order_list)
-        return render_template('customer.html', customer_details=customer_details, orders=orders, order_list=order_list)
+        session['customer_id'] = customer_details[0]            # set user ID in session
+        session['username'] = customer_details[1]            # set user ID in session
+        print(customer_details)
+        print(session)
+        orders = Admin(email).orders_by_id(session['customer_id'])      # Fetch user's orders
+        # print('ORDERS', orders == True)
+
+        # Check if user has orders and sort them
+        if orders:
+            chicks = Admin(email).sort_orders('chicks', session['customer_id'])
+            layers = Admin(email).sort_orders('layers', session['customer_id'])
+            cocks = Admin(email).sort_orders('cocks', session['customer_id'])
+            order_list = [chicks, layers, cocks]
+            print('ORDER LIST: ', order_list)
+            return render_template('customer.html', customer_details=customer_details, orders=orders, order_list=order_list)
+        else:
+            return render_template('customer.html', customer_details=customer_details, orders=orders)
+
     except KeyError:
         return render_template('customer-login.html')
 

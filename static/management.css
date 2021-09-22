@@ -1,0 +1,296 @@
+/* Admin Panel*/
+.employees-container {
+  height: 90vh;
+  margin: 10px;
+  padding: 20px;
+  text-align: center;
+}
+.customers-container {
+  padding: 10px;
+  height: 100vh;
+}
+.orders-container {
+  padding: 10px;
+  height: 100vh;
+}
+/* Health Centre */
+.health-container,
+.brooder-container {
+  height: 100vh;
+  width: 80vw;
+  display: flex;
+  /* background-color: green; */
+  justify-content: space-between;
+  margin: auto;
+}
+.health-updates,
+.brooder-updates {
+  height: 80%;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 20px;
+  /* background-color: aqua; */
+  padding: 10px;
+  border: 1px solid black;
+
+}
+.medicine-section,
+.mortality,
+.vaccination {
+  height: 400px;
+  width: 98%;
+  margin: auto;
+border-bottom: 1px solid black;
+padding-bottom: 10px;
+}
+.vaccination{
+    border-bottom: none;
+}
+.medicine-section form,
+.mortality form,
+.vaccination form {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-around;
+  /* background-color: yellow; */
+}
+input, select{
+    height: 25px;
+    padding: 10px;
+}
+.health-stats,
+.brooder-stats {
+  /* background-color: red; */
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+/* Brooders*/
+.feeds-section,
+.feeds-usage,
+.cleaning {
+    width: 98%;
+    margin: auto;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+.cleaning{
+    border-bottom: none;
+}
+.feeds-section form,
+.feeds-usage form,
+.cleaning form {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: space-around;
+  /* background-color: yellow; */
+}
+
+/* Management */
+.management-container{
+    height: auto;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    
+}
+.admin-nav{
+    height: 80vh;
+    width: 250px;
+    padding-left: 10px;
+    /* background-color: fuchsia; */
+    /* z-index: 100; */
+    /* border-left: 1px solid black ; */
+    border-right: 2px solid black ;
+
+}
+.admin-list{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    list-style: none;
+    padding: 20px;
+
+}
+.admin-func{
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    width: 100px;
+}
+.admin-func a{
+    text-decoration: none;
+    color: black;
+}
+.admin-func:hover{
+    text-decoration: underline;
+}
+.active-func{
+    /* background-color: black; */
+    box-shadow: 5px 5px 5px #0f0;
+    color: black;
+    /* transform: scale(1.2); */
+    font-size: 2rem;
+    width: 100%;
+    padding: 2px 10px;
+}
+.admin-panel{
+    flex: 1;
+    background-color: red;
+    height: inherit;
+    /* display: flex; */
+}
+
+.flock-container{
+    height: 80vh;
+    width: 100%;
+    background-color: ivory;
+    display: none;
+    padding: 20px;
+}
+.flock-section{
+    height: 100%;
+    width: inherit;
+    display: flex;
+}
+.flock-stats{
+    /* display: flex; */
+    /* background-color: green; */
+    height: 80%;
+}
+.flock-stats .main-stat{
+    font-size: 1.2rem;
+    /* background-color: gold; */
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    flex: 1;
+    height: 70%;
+    width:  300px;
+}
+.spinner-circle{
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+
+    position: relative;
+    /* background-color: blue; */
+}
+.spinner{
+    border: 20px dashed #0f0;
+    /* border-top: none;
+    border-bottom: none; */
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    z-index: 4;
+    transition: all ease-in-out 5s;
+    animation: spin 5s infinite;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.spinner-content{
+    font-weight: 600;
+    font-size: 3rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    /* color: green; */
+}
+
+
+.flock-stats .stat-meta{
+    /* background-color: yellow;             */
+    display: flex;
+    flex-direction: column;
+}
+.update-flock{
+    height:100%;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: turquoise; */
+}
+.update-flock form{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    background-color: black;
+}
+.flock-history{
+    width: 90%;
+}
+
+.brooders-container{
+    height: 100vh;
+    background-color: lawngreen;
+    display: none;
+}
+.order-container{
+    height: 100vh;
+    background-color: lightsalmon;
+    display: none;
+}
+.feedback-container{
+    height: 100vh;
+    background-color: crimson;
+    display: none;
+}
+.location-container{
+    height: 100vh;
+    background-color: darkmagenta;
+    display: none;
+}
+.statistics-container{
+    background-color: floralwhite;
+    display: none;
+}
+.active-panel{
+    display: block;
+}
+
+
+
+
+@keyframes spin {
+    0%{
+        transform: rotate(0deg);
+        opacity: 1;
+        color: green;
+    }
+    25%{
+        transform: rotate(120deg);
+        opacity: .4;
+        color: black;
+    }
+    50%{
+        transform: rotate(180deg);
+        opacity: .8;
+        color: green;
+    }
+    100%{
+        transform: rotate(360deg);
+        opacity: 1;
+        color: black;
+    }
+}

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
 
 *{
     margin: 0px;
@@ -7,6 +7,7 @@
 }
 html{
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 body{
     font-family: Poppins, monospace ;
@@ -59,23 +60,63 @@ nav a{
     background-color: rgb(255, 255, 255);
     margin: 3px;
 }
+.user-nav{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    height: 5vh;
+    background-color: black;
+    color: white;
+    list-style: none;
+    position: sticky;
+    top: 8vh;
+    z-index: 10;
+}
+.user-nav li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* width: 150px; */
+}
+.user-nav a{
+    text-decoration: none;
+    color: inherit;
+   
+}
+.online{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background-color: #0f0;
+    z-index: 100;
+    margin-left: 10px;
+    cursor: pointer;
+}
 
 .landing{
-    height: 40vh;
+    height: 20vh;
+    width: 100vw;
     background-color: rgb(255, 0, 0, 0.8);
+    position: relative;
 }
 .landing-text{
     text-align: center;
     height: 40%;
-    width: 400px;
-    margin: auto;
-    position: relative;
-    top: 30%;
+    width: 600px;
+    /* margin: auto; */
+    position: absolute;
+    /* top: 0%; */
+    left: 50%;
+    transform: translateX(-50%);
 }
 .landing-text h1{
+    width: 100%;
     font-size: 4rem;
     font-weight: 1000;
     letter-spacing: 3px;
+    /* background-color: green; */
 }
 .landing-text p{
     font-size: 1.2rem;
@@ -111,28 +152,29 @@ nav a{
 }
 
 .scroll-link{
-    padding: 5px 10px;
+    padding: 5px 20px;
     height: 30px;
-    width: 70px;
-    font-size: 1rem;
+    width: 80px;
+    font-size: 12px;
     text-decoration: none;
     color: rgba(255,255,255, 0.7);
     background: rgba(0,0,0,0.8);
     position: absolute;
-    top: 90%;
+    top: 85%;
     right: 3%;
 }
 
 .btn{
-    width: 200px;
-    height: 40px;
-    background-color: rgba(0,0,0, 0.7);
-    color: white;
-    margin: 20px;
-    outline: none;
-    border-radius: 2px;
-    margin-top: 10px;
-    font-size: 1rem;
+width: 150px;
+height: 30px;
+padding: 5px 20px;
+background-color: black;
+font-size: 14px;
+/* font-weight: 100; */
+letter-spacing: 2px;
+color: white;
+outline: none;
+border: none;
 }
 button a{
     text-decoration: none;
@@ -198,6 +240,7 @@ button a{
     display: flex;
     align-items: center;
     color: rgba(121, 121, 121, 0.8);
+    position: relative;
 }
 .info-text{
     height: 70%;
@@ -244,6 +287,7 @@ footer div{
     display: flex;
     align-items: center;
     flex-direction: column;
+
 }
 .login-container .container-title{
     width: 100%;
@@ -266,6 +310,10 @@ footer div{
 }
 .login-container form span input{
     width: 80%;
+    height: 40px;
+    outline: none;
+    padding: 10px 50px;
+
 }
 
 
@@ -301,177 +349,58 @@ footer div{
     width: 80%;
 }
 
-/* CUSTOMER PROFILE */
-.user-nav{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 20px;
-    height: 5vh;
-    background-color: black;
-    color: white;
-    list-style: none;
-    position: sticky;
-    top: 8vh;
-    z-index: 10;
+/* All Tables  */
+table {
+  /* height: 70%; */
+  width: 100%;
+  border-collapse: collapse;
+  /* background-color: green; */
 }
-.user-nav a{
-    text-decoration: none;
-    color: inherit;
-}
-.user-section{
-    margin: 0;
-    height: 50vh;
-}
-.user-details{
-    height: 90%;
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    padding: 20px;
-    border: 1px solid beige;
-    background-color: black;
-    border-radius: 10px;
-    width: 100%;
-}
-.user-info, .order-summary{
-    line-height: 30px;
-    text-align: left;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 90%;
-    width: 40%;
-    background-color: beige;
-    border: 1px solid black;
-  border-radius: 10px;
-    padding: 10px;
-    box-shadow: 10px 10px 10px #333;
-}
-.stock-section{
-    height: 100vh;
-    width: 100%;
-    margin: auto;
-    background-color: beige;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-  
-}
-.stock-section h1{
-    font-weight: 1000;
-    font-size: 4rem;
-}
-.stock-container{
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 90%;
-    height: 80%;
-}
+tr, td {
+  border: 1px solid #333;
+  text-align: left;
+  padding: 8px;
+  font-size: 14px;
 
-.user-product{
-    width: 25%;
-    height: 90%;
-    border: 1px solid black;
-    border-radius: 10px;
-    margin: 10px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 3px 3px 5px #333;
-    transition: all ease-in-out .6s;
-}
-.user-product:hover{
-    transform: translateY(-3%);
-    box-shadow: 0px 15px 10px #333;
-    z-index: 1;
-}
-.chicken-img{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
-    width: 100%;
 
+  /* background-color: red; */
 }
-.chicken-img img{
-    width: 100%;
-    height: 90%;
-    padding: 5px;
-    border-radius: 10px;
-}
-.chicken-img span{
-    font-size: 1.5rem;
-    font-weight: 100;
-    align-self: center;
-    height: 10%;
-}
-.chicken-details{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-self: center;
-    width: 100%;
-    height: 50%;
-    padding: 20px;
-}
-.chicken-details span input{
-    width: 60px;
-    height: 50px;
-    border-radius: 5%;
+th{
     text-align: center;
-    font-size: 1.8rem;
-    outline: none;
 }
-.chicken-details form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    top: 15px;
+tr:nth-child(even){
+  background-color: rgb(179, 179, 179);
 }
-
-.contact-container{
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    margin-top: 20px;
+table select,
+table button {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  padding: 3px;
+  margin: 1px;
 }
-.container-title{
-    display: flex;
-    width: 80%;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.container-title hr{
-    width: 40%;
-    height: 1px;
-}
-.contact-container h1{
-    font-weight: 100;
-}
-.contact-container form{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 80%;
+table input {
     width: 100%;
-}
-.form-control{
-    width: 50%;
-    height: 40px;
-    padding: 10px;
+    height: inherit;
+    padding: 5px;
+   border: none;
+   outline: none;
+  }
+.new-employee .btn{
+      height: 100%;
+      width: 99%;
+      background-color: white !important;
+      color: black;
+  }
+  .new-employee td{
+    height: 50px;
+    padding: 0;
+  }
+  .form-control{
+    width: 120px;
     outline: none;
-    margin: 10px;
+    border: 1px solid rgb(128, 128, 128);
+
 }
 .form-control:focus, textarea:focus{
     border: 1px solid rgba(255, 0, 0, 0.8);
@@ -483,211 +412,6 @@ textarea{
     font-size: 1.6rem;
     padding: 10px;
 }
-.contact-container button{
-    width: 150px;
-    height: 40px;
-    border-radius: 30px;
-}
-
-/* MANGEMENT */
-.brooder-container{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    padding: 20px;
-    background-image: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.5)), url('./resources/chicken-farm-1.jpg');
-    background-attachment: fixed;
-    background-position: center;
-    color: white;
-}
-.brooder-container h2{
-    font-size: 3rem;
-}
-.brooders{
-    padding: 10px;
-    height: 100%;
-    width: 60%;
-}
-.brooder-section{
-    border: 1px solid #333;
-    background-color: beige;
-    color: black;
-    padding: 10px;
-    border-radius: 10px;
-    box-shadow: 10px 10px 10px #333;
-    display: flex;
-    justify-content: space-between;
-    height: 250px;
-}
-.brooder-section .brooder-meta{
-    display: flex;
-    flex-direction: column;
-    width: 60%;
-    height: 100%;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 10px;
-}
-.brooder-meta span{
-   display: flex; 
-   align-items: center;
-
-}
-.update-form{
-    display: none;
-    transition: all ease-in-out 3s;
-}
-.update-form-active{
-    display: block;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 40%;
-}
-.update-form-active span{
-    width: 100%;
-    height: 20%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.update-form-active input{
-    height: 50%;
-    width: 70%;
-}
-
-.brooder-container h3{
-    text-align: center;
-    padding: 10px;
-    font-size: 2rem;
-}
-.brooder-details{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 80%;
-}
-.brooder-details span{
-    font-size: 1.5rem;
-    padding: 10px;
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    height: 15%;
-    text-align: left;
-}
-.brooder-details span h4{
-    width: 30%;
-}
-.brooder-details span strong{
-    width: 70%;
-    padding-left: 10px;
-}
-.brooder-buttons{
-    height: 5%;
-}
-
-.inventory-container{
-    text-align: center;
-    height: 60vh;
-    padding: 10px;
-    margin: 10px;
-}
-.inventory-table table{
-    width: 80%;
-    height: 40vh;
-    margin: auto;
-}
-.inventory-table table, .inventory-table tr, .inventory-table td{
-    border: 1px solid black;
-}
-.report-container{
-    height: 60vh;
-    background-color: rgb(255, 0, 0, 0.4);
-    padding: 10px;
-}
-
-/* ADMIN PANEL*/
-.employees-container{
-    height: 90vh;
-    margin: 10px;
-    padding: 20px;
-    text-align: center;
-}
-table{
-    height: 60vh;
-    width: 90%;
-    text-align: center;
-    margin: auto;
-    font-size: 1.3rem;
-    margin-top: 10px;
-}
-
-td{
-    border: 1px solid black;
-    margin: 0;
-    padding: 2px;
-    height: 10px;
-
-}
-.employees-container table input{
-    width: 100%;
-    height: 100%;
-    padding: 5px;
-    margin: 0;
-    border-top:  none;
-    border-left:  none;
-    border-right:  none;
-    border-bottom:  1px solid black;
-}
-
-.employees-container table .new-employee td{
-    border: none;
-}
-.employees-container select, .employees-container button{
-    width: 100px;
-    height: 30px;
-    text-align: center;
-    padding: 3px;
-    margin: 1px ;
-}
-.customers-container{
-    padding: 10px;
-    height: 100vh;
-}
-.orders-container{
-    padding: 10px;
-    height: 100vh;
-}
-/* EMPLOYEE PAGE */
-.profile-container{
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-.employee-details{
-    height: 80%;
-    width: 70%;
-    display: flex;
-    flex-direction: column ;
-    justify-content: space-around;
-    background-color: beige;
-    border: 1px solid black;
-    border-radius: 10px;
-    box-shadow: 3px 3px 10px #333;
-    padding: 10px;
-    letter-spacing: 3px;
-}
-.employee-details:hover{
-    box-shadow: 5px 5px 15px #333;
-}
-.employee-details span{
-    display: flex;
-    align-items: center;
-    text-align: left;
-    justify-content: space-between;
-    width: 70%;
+input:disabled{
+    cursor: not-allowed;
 }

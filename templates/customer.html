@@ -8,6 +8,7 @@
     <link rel="icon" href="../static/resources/chicken.ico">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/customer.css">
     <title>User Profile</title>
 </head>
 
@@ -22,38 +23,60 @@
 
 
     <ul class="user-nav">
-        <li><a href="/customer"> Username </a></li>
-        <li><a href="#">My Settings</a></li>
+        <li><a href="/customer"> {{customer_details[1][0]}} {{customer_details[2]}} </a> <div class="online"></div></li>
+        <li><a href="#">My Orders</a></li>
+        <li><a href="#">Settings</a></li>
         <li><a href="/login">Log Out</a></li>
     </ul>
-
-    <section class="user-section">
+<section class="user-section">
         <div class="user-details">
             <div class="user-info">
-                <span ><strong>Username:</strong> <small id="username">{{customer_details[1]}} {{customer_details[2]}}</small></span>
-                <span ><strong>UserId:</strong> <small id="user-id">{{customer_details[0]}} </small></span>
+                <h3>User Information</h3> <br>
+                <span ><strong>Username: </strong> <small id="username">{{customer_details[1]}} {{customer_details[2]}}</small></span>
+                <span ><strong>UserId: </strong> <small id="user-id">{{customer_details[0]}} </small></span>
                 <span ><strong>Phone: </strong><small id="phone">{{customer_details[4]}}</small></span>
                 <span><strong>Email: </strong><small  id="email">{{customer_details[3]}}</small></span>
-                <span ><strong>Location:</strong> <small id="location">{{customer_details[5]}}</small></span>
-                <span><strong>Password:</strong><small>{{customer_details[7][:30]}}</small></span>
+                <span ><strong>Location: </strong> <small id="location">{{customer_details[6]}}</small></span>
+                <span><strong>Password: </strong><small>{{customer_details[5][:10]}}</small></span>
                 <button class="btn"><a href="tel:0712345678"> Call </a></button>
             </div>
 
             <div class="order-summary">
+                <h3>Order Details</h3> <br>
                 <span><strong>Orders:</strong> <small>23</small></span>
                 <span><strong>Pending: </strong><small>6</small></span>
                 <span><strong>Delivered: </strong><small>17</small></span>
-                {{orders}}
-                <span ><strong id="order-list">{{orders_list}}</strong></span>
+                <!-- {{orders}} -->
+             {%for order in orders%}
+             <span ><strong id="order-list">{{order[3]}} {{order[2]}}    </strong> <i>{{order[4].strftime('%a, %d/%b/%y')}}</i></span>
+                    {%endfor %}
+            
                 <button class="btn"><a href="#"> View History</a></button>
             </div>
-        </div>
-    </section>
+    </div>
 
-
-    <section class="stock-section" id="stock-section">
+<!-- PRODUCTS IN STOCK -->
+    <div class="stock-section" id="stock-section">
         <h1>What's In Stock</h1>
         <div class="stock-container">
+            <div class="user-product">
+                <div class="chicken-img">
+                    <img src="../static/resources/cock.jpg" alt="BROILERS">
+                    <span>Reserved Count: &nbsp;&nbsp;<strong>10</strong>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Edit</a></span>
+                </div>
+                <div class="chicken-details">
+                    <h2>Broilers</h2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta deserunt vitae minus aliquam,
+                        quisquam iure?</p>
+                    <i>{{message}}</i>
+                    <span>
+                        <form action="/order/broilers" method="POST"> <input type="number" name="count" id=""><button
+                                class="btn">RESERVE</button></form>
+                    </span>
+                </div>
+            </div>
+
             <div class="user-product">
                 <div class="chicken-img">
                     <img src="../static/resources/chicken-farm.jpg" alt="LAYERS">
@@ -71,13 +94,29 @@
                     </span>
                 </div>
             </div>
+
+            <div class="user-product">
+                <div class="chicken-img">
+                    <img src="../static/resources/chick.jpg" alt="CHICKS">
+                    <span>Reserved Count: &nbsp;&nbsp;<strong>50</strong>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#">Edit</a></span>
+                </div>
+                <div class="chicken-details">
+                    <h2>Chicks</h2>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Soluta deserunt vitae minus aliquam,
+                        quisquam iure?</p>
+                    <i>{{message}}</i>
+                    <span>
+                        <form action="/order/chicks" method="POST"> <input type="number" name="count" id=""><button
+                                class="btn">RESERVE</button></form>
+                    </span>
+                </div>
             </div>
-
-           
-
-    
-    </section>
-
+            </div>
+    </div>
+</section>
+   
+<!-- CUSTOMER FEEDBACK SECTION -->
     <section class="contact-container" id="contacts">
         <span class="container-title">
             <hr>
@@ -85,20 +124,17 @@
             <hr>
         </span>
         <h2>Drop us a note.</h2>
-        <form action="">
-            <input type="email" name="" id="" placeholder="Email*" class="form-control">
-            <input type="text" name="" id="" placeholder="Name" class="form-control">
-            <textarea>Message</textarea>
-            <input type="text" name="" id="" placeholder="Phone*" class="form-control">
+        <form action="/feedback" method="POST">
+            <!-- <input type="email" name="" id="" placeholder="Email*" class="form-control"> -->
+            <!-- <input type="text" name="" id="" placeholder="Name" class="form-control"> -->
+            <textarea placeholder='Whats on your mind...' name='message'></textarea>
+            <!-- <input type="text" name="" id="" placeholder="Phone*" class="form-control"> -->
             <button class="btn">SEND</button>
 
         </form>
         <span> This site is protected by <a href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>
             apply.</span>
-    </section>
-    <span style="float: right;"> This site is protected by <a href="#">Privacy Policy</a> and <a href="#">Terms of
-            Service</a>
-        apply.</span> <br>
+        </section>
     <footer>
         <div class="sponsors">Lorem ipsum dolor sit amet consectetur. </div>
         <span class="copyright"> Copyright&copy; Shammah 2021</span>
