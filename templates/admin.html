@@ -27,7 +27,7 @@
     </header>
     <div class="navigation">
         <ul class="user-nav">
-        <li><a href="/employee">Hello: {{email}}</a><div class="online"></div></li>
+        <li><a href="/employee">Hello: {{username}}</a><div class="online"></div></li>
             <li><a href="/employee/brooder"> Brooders </a></li>
             <li><a href="/employee/health">Health Centre</a></li>
             {% if 'admin' in email %}
@@ -76,12 +76,12 @@
             <tr class="new-employee">
                 <form action="/new-employee" method="POST">
                     <td><input type="text" id="" name="employee-id" placeholder="Employee ID" title="Auto Generated" disabled></td>
-                    <td><input type="text" id="" name="employee-name" placeholder="Name" ></td>
-                    <td><input type="text" id="" name="employee-phone" placeholder="Phone" ></td>
+                    <td><input type="text" id="" name="employee-name" placeholder="Name" required></td>
+                    <td><input type="text" id="" name="employee-phone" placeholder="Phone" required ></td>
                     <td><input type="text" id="" name="employee-email" placeholder="Email" disabled title="Auto Generated"></td>
-                    <td><input type="text" id="" name="section" placeholder="Section" >
+                    <td><input type="text" id="" name="section" placeholder="Section"  required>
                     </td>
-                    <td><select name="rights" id="" class="btn">
+                    <td><select name="rights" id="" class="btn" required>
                         <option value="">Standard</option>
                         <option value="">Sudo</option>
                     </select></td>
@@ -118,6 +118,7 @@
                 <td>{{customer[5][0:10]}}</td>
                 <td>{{customer[7]}}</td>
                 <td>{{customer[8].strftime('%d %b %Y')}}</td>
+                <td>25</td>
             </tr>
             {% endfor %}
         </table>

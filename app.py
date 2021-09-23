@@ -88,12 +88,13 @@ def employee_login():
 def admin():
     try:
         admin_email = session['email']
+        username = admin_email.split('@')[0]
         admin_id = session['employee_id']
         admin = Admin(admin_email)
         employees = admin.employee_table()
         customers = admin.customers_table()
         orders = admin.orders_table()
-        return render_template('admin.html', employees=employees, customers=customers, orders=orders, email=admin_email)
+        return render_template('admin.html', employees=employees, customers=customers, orders=orders, email=admin_email, username=username)
     except KeyError:
         return redirect('employee_login')
 
@@ -121,6 +122,18 @@ def management():
         redirect(url_for('employee_login'))
 
 
+@app.route('/update/flock', methods=['POST'])
+def admin_table_update():
+    admin = Admin(session['email'])
+    flock_quantity = request.form['flock-quantity']
+    flock_price = request.form['flock-price']
+    date_bought = request.form['date-bought']
+    timestamp = admin.convert_to_timestamp(date_bought)
+    print('Flock Details', flock_quantity, flock_price, timestamp)
+    admin.update_flock_table(flock_quantity, flock_price, timestamp)
+    return redirect(url_for('management'))
+
+
 @app.route('/new-employee', methods=['POST'])
 def new_employee():
     first_name, last_name = request.form['employee-name'].split(' ')
@@ -140,12 +153,12 @@ def new_employee():
 @app.route('/employee')
 def employee():
     try:
-        email = session['email']
+        employee_email = session['email']
         employee_id = session['employee_id']
         # print('EMPLOYEE ID: ', employee_id)
-        my_details = Admin(email).my_details(employee_id)
-        orders = Admin(email).orders_by_id(employee_id)
-        return render_template('employee.html', employee_details=my_details[0], email=email, orders=orders)
+        my_details = Admin(employee_email).my_details(employee_id)
+        orders = Admin(employee_email).orders_by_id(employee_id)
+        return render_template('employee.html', employee_details=my_details[0], email=employee_email, orders=orders)
     except KeyError:
         return redirect('employee_login')
 
@@ -155,9 +168,10 @@ def employee():
 def health():
     try:
         employee_id = session['employee_id']
-
+        employee_email = session['email']
+        username = employee_email.split('@')[0]
         if request.method == 'GET':
-            return render_template('healthSpecialist.html')
+            return render_template('healthSpecialist.html', username=username, email=employee_email)
         else:
             pass
     except KeyError:
@@ -169,9 +183,11 @@ def health():
 def brooder():
     try:
         employee_id = session['employee_id']
+        employee_email = session['email']
+        username = employee_email.split('@')[0]
 
         if request.method == 'GET':
-            return render_template('brooderWorker.html')
+            return render_template('brooderWorker.html', username=username, email=employee_email)
         else:
             pass
     except KeyError:

@@ -40,96 +40,194 @@
     <section class="management-container">
       <div class="admin-nav">
         <ul class="admin-list">
-          <li class="admin-func active-func"><a href="#">Flock</a></li>
-          <li class="admin-func ">Brooder</li>
+          <li class="admin-func active-func">Flock</li>
+          <li class="admin-func">Brooders</li>
           <li class="admin-func">Orders</li>
           <li class="admin-func">Feedback</li>
           <li class="admin-func">Location</li>
-          <li class="admin-func">Statisitics</li>
+          <li class="admin-func">Statistics</li>
         </ul>
       </div>
       <section class="admin-panel">
+        <!-- Flock Data -->
+        <section class="hidden-panel active-panel" id="flock">
+          <h1>Flock Statistics</h1>
+          <div class="flock-section">
+            <div class="statistics">
+              <div class="flock-stats stats">
+                <div class="main-stat">
+                  <div class="spinner-circle">
+                    <div class="spinner"></div>
+                    <!-- Get Latest flock addition -->
 
-
-          <!-- Flock Data -->
-        <section class="flock-container active-panel">
-            <h1>Flock Statistics</h1>
-            <div class="flock-section">
-                <div class="statistics">
-                    <div class="flock-stats stats">
-                      <div class="main-stat">
-                        <!-- {{flock}}  -->
-                       <div class="spinner-circle">
-                           <div class="spinner"></div>
-                            <div class='spinner-content'>630</div>
-                        </div>
-                        <span><strong>Last Purchase: </strong>6 Aug 2021</span>
-                      </div>               
-                      <div class="stat-meta">
-                          <h4>Flock Allocation On Purchase</h4>
-                        <span><i>Brooder I: </i>100</span>
-                        <span><i>Brooder II: </i>80</span>
-                        <span><i>Brooder III: </i>100</span>
-                        <span><i>Brooder IV: </i>110</span>
-                      </div>
-                    </div>
+                    <div class="spinner-content">{{flock[-1][1]}}</div>
                   </div>
-
-
-                  <div class="update-flock">
-                        <div class="add-flock">
-                            <h3>Add To Flock</h3>
-                            <form action="/flock/update/add" method="POST">
-                                <input type="text" name="flock-quantity" id="" placeholder="Quantity">
-                                <input type="text" name="flock-price" id="" placeholder="Price">
-                                <input type="date" name="date-bought" id="" placeholder="Date Bought">
-                                <button class="btn">Update Flock</button>
-                            </form>
-                      </div>
-                      <div class="flock-history">
-                          <h3>Flock Update History</h3>
-                          <table>
-                              <tr>
-                                  <th>Quantity</th>
-                                  <th>Price</th>
-                                  <th>Date Bought</th>
-                              </tr>
-                              <tr>
-                                <td>630</td>
-                                <td>6500</td>
-                                <td>6 Aug 2021</td>
-                            </tr>
-                            <tr>
-                                <td>550</td>
-                                <td>5000</td>
-                                <td>3 May 2021</td>
-                            </tr>
-                            <tr>
-                                <td>600</td>
-                                <td>6000</td>
-                                <td>1 Mar 2021</td>
-                            </tr>
-                            <tr>
-                                <td>300</td>
-                                <td>2500</td>
-                                <td>1 Jan 2021</td>
-                            </tr>
-                          </table>
-                      </div>
-                        </div>
+                  <span
+                    ><strong>Last Purchase: </strong>{{flock[-1][3].strftime('%d
+                    %B %Y')}}</span
+                  >
+                </div>
+                <div class="stat-meta">
+                  <h4>Flock Allocation On Purchase</h4>
+                  <span><i>Brooder I: </i>100</span>
+                  <span><i>Brooder II: </i>80</span>
+                  <span><i>Brooder III: </i>100</span>
+                  <span><i>Brooder IV: </i>110</span>
+                </div>
+              </div>
             </div>
-        </section>
+
+            <div class="update-flock">
+              <div class="add-flock">
+                <h3>Add To Flock</h3>
+                <form action="/update/flock" method="POST">
+                  <input
+                    type="text"
+                    name="flock-quantity"
+                    id=""
+                    placeholder="Quantity"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="flock-price"
+                    id=""
+                    placeholder="Price"
+                    required
+                  />
+                  <input
+                    type="date"
+                    name="date-bought"
+                    id=""
+                    placeholder="Date Bought"
+                    required
+                  />
+                  <button class="btn">Update Flock</button>
+                </form>
+              </div>
+              <div class="flock-history">
+                <h3>Flock Update History</h3>
+                <table>
+                  <tr>
+                    <th>Quantity<i>(Count)</i></th>
+                    <th>Price<i>(Ksh)</i></th>
+                    <th>Date Bought</th>
+                  </tr>
+                  {% for data in flock[::-1] %}
+                  <tr>
+                    <td>{{data[1]}}</td>
+                    <td>{{data[2]}}</td>
+                    <td>{{data[3].strftime('%d %b %y')}}</td>
+                  </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+          </div>
         </section>
 
+        <!-- Brooder's Data -->
+        <section class="hidden-panel" id="brooders">
+          <h1>Brooders Statistics</h1>
+          <div class="brooders-section">
+            <div class="statistics">
+              <div class="brooder-stats stats">
+                <div class="main-stat">
+                  <div class="spinner-circle">
+                    <div class="spinner"></div>
+                    <!-- Get Latest flock addition -->
 
+                    <div class="spinner-content">{{flock[-1][1]}}</div>
+                  </div>
+                  <span
+                    ><strong>Last Purchase: </strong>{{flock[-1][3].strftime('%d
+                    %B %Y')}}</span
+                  >
+                </div>
+                <div class="stat-meta">
+                  <h4>Flock Allocation On Purchase</h4>
+                  <span><i>Brooder I: </i>100</span>
+                  <span><i>Brooder II: </i>80</span>
+                  <span><i>Brooder III: </i>100</span>
+                  <span><i>Brooder IV: </i>110</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="update-flock">
+              <div class="add-flock">
+                <h3>Add To Flock</h3>
+                <form action="/update/flock" method="POST">
+                  <input
+                    type="text"
+                    name="flock-quantity"
+                    id=""
+                    placeholder="Quantity"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="flock-price"
+                    id=""
+                    placeholder="Price"
+                    required
+                  />
+                  <input
+                    type="date"
+                    name="date-bought"
+                    id=""
+                    placeholder="Date Bought"
+                    required
+                  />
+                  <button class="btn">Update Flock</button>
+                </form>
+              </div>
+              <div class="flock-history">
+                <h3>Brooder History</h3>
+                <table>
+                  <tr>
+                    <th>Quantity<i>(Count)</i></th>
+                    <th>Price<i>(Ksh)</i></th>
+                    <th>Date Bought</th>
+                  </tr>
+                  {% for data in flock[::-1] %}
+                  <tr>
+                    <td>{{data[1]}}</td>
+                    <td>{{data[2]}}</td>
+                    <td>{{data[3].strftime('%d %b %y')}}</td>
+                  </tr>
+                  {% endfor %}
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="hidden-panel" id="orders">
+          <h2>Orders</h2>
+          <div class="orders-section">
+            <h3>Orders Section</h3>
+          </div>
+        </section>
+        <section class="hidden-panel" id="location">
+          <h2>Location</h2>
+        </section>
+        <section class="hidden-panel" id="feedback">
+          <h2>Feedback</h2>
+        </section>
+        <section class="hidden-panel" id="statistics">
+          <h2>Statistics</h2>
+        </section>
+      </section>
     </section>
 
-    <a href="#" style="float: right">Back To Top</a>
-    <br />
+    <!-- <a href="#" style="float: right">Back To Top</a> -->
+    <!-- <br /> -->
     <footer>
       <div class="sponsors">Lorem ipsum dolor sit amet consectetur.</div>
       <span class="copyright"> Copyright&copy; Shammah 2021</span>
     </footer>
     <script src="../static/main.js"></script>
+    <script src="../static/manage.js"></script>
   </body>
 </html>

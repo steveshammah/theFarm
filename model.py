@@ -361,6 +361,12 @@ class Admin(User):
             flock_data = cursor.fetchall()
             return flock_data
 
+    def update_flock_table(self, quantity, price, date):
+        with DbManager(**DBCONFIG) as cursor:
+            update_flock_sql = '''INSERT INTO flock (quantity, price, date_bought) VALUES(%s, %s, %s)'''
+            cursor.execute(update_flock_sql, (quantity, price, date))
+            return True
+
     def brooders_table(self):
         with DbManager(**DBCONFIG) as cursor:
             SQL = '''SELECT * FROM brooder'''
@@ -374,6 +380,11 @@ class Admin(User):
             cursor.execute(SQL)
             feedback_data = cursor.fetchall()
             return feedback_data
+
+    def convert_to_timestamp(self, time):
+        time_string = f'{time}T08::00::00.000000'
+        timestamp = datetime.strptime(time_string, '%Y-%m-%dT%H::%M::%S.%f')
+        return timestamp
 
 
 

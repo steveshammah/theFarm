@@ -18,13 +18,15 @@
         <nav>
             <ul class="nav-list">
                 <li class="nav-item logo"><a href="/">The Farm</a></li>
+                {% if 'admin' in email %}
                 <li class="nav-item"><a href="/admin"> Admin</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
     <div class="navigation">
         <ul class="user-nav">
-            <li><a href="/employee">Hello: {{email}}</a> <div class="online"></div></li>
+            <li><a href="/employee">Hello: {{username}}</a> <div class="online"></div></li>
             <li><a href="/employee/brooder"> Brooders </a></li>
             <li><a href="/employee_login">Log Out</a></li>
         </ul>
