@@ -347,7 +347,7 @@ footer div {
 /* All Tables  */
 table {
   /* height: 70%; */
-  width: 100%;
+  width: 80%;
   border-collapse: collapse;
   /* background-color: green; */
 }
@@ -355,24 +355,15 @@ tr,
 td {
   border: 1px solid #333;
   text-align: left;
-  padding: 8px;
-  font-size: 14px;
-
-  /* background-color: red; */
+  padding: 10px;
+  font-size: 12px;
 }
 th {
   text-align: center;
+  padding: 10px;
 }
 tr:nth-child(even) {
   background-color: rgb(179, 179, 179);
-}
-table select,
-table button {
-  width: 100px;
-  height: 30px;
-  text-align: center;
-  padding: 3px;
-  margin: 1px;
 }
 table input {
   width: 100%;
@@ -381,11 +372,14 @@ table input {
   border: none;
   outline: none;
 }
-.new-employee .btn {
+.new-employee .btn,
+.new-employee select {
   height: 100%;
   width: 99%;
-  background-color: white !important;
   color: black;
+  font-size: 12px;
+  padding: 1px;
+  background-color: white;
 }
 .new-employee td {
   height: 50px;

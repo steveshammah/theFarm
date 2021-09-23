@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../static/resources/chicken.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/customer.css" />
+
+    <title>Admin Panel</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <ul class="nav-list">
+          <li class="nav-item logo"><a href="/">The Farm</a></li>
+          <li class="nav-item"><a href="/#products">Explore</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="navigation">
+      <ul class="user-nav">
+        <li>
+          <a href="/customer">Active</a>
+          <div class="online"></div>
+        </li>
+        <li><a href="#"> Settings </a></li>
+        <li><a href="/login">Log Out</a></li>
+      </ul>
+    </div>
+    <div class="my-orders-container">
+      <div class="pending">
+        <h2>Pending Orders</h2>
+
+        <div class="cart">
+          <div class="layers">
+            <i>Layers</i> <strong class="layers-orders"></strong>
+          </div>
+
+          <div class="layers">
+            <i>Broilers</i> <strong class="broilers-orders"></strong>
+          </div>
+
+          <div class="layers">
+            <i>Chicks</i> <strong class="chicks-orders"></strong>
+          </div>
+          <span>
+            <strong>Total Price: </strong>
+            <strong>Quantity: </strong>
+          </span>
+        </div>
+      </div>
+      <div class="others" id="history">
+        <h2>Order History</h2>
+      </div>
+    </div>
+    <footer>
+      <div class="sponsors">Lorem ipsum dolor sit amet consectetur.</div>
+      <span class="copyright"> Copyright&copy; Shammah 2021</span>
+    </footer>
+  </body>
+</html>

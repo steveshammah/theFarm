@@ -1,53 +1,37 @@
-const userDetails = {
-    _username : ' ' ,
-    _email : ' ' ,
-    _userId : ' ' ,
-    _orders : {
-        chicks: ' ',
-        layers: ' ',
-        broilers: ' ',
-    },
+const orderButton = document.querySelectorAll(".order-form .btn");
+console.log(orderButton);
 
-    get username() {
-        return this._username;
-    },
-    get email() {
-        return this._email;
-    },
-    get userId() {
-        return this._userId;
-    },
-    get orders() {
-        return this._orders;
-    },
+let order = {};
 
-    set username(newName) {
-        this._username = newName;
-    },
-    set email(newEmail) {
-        this._email = newEmail;
-    },
-    set userId(newUserId) {
-        this._userId = newUserId;
-    },
-    set orders(ordersObj) {                    //object as param
-        this._orders = ordersObj;
-    },
-}
+orderButton.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    const parentElement = button.parentElement;
+    e.preventDefault();
+    console.log("Parent Element", parentElement.childNodes[1]);
+    const product = parentElement.id;
+    const quantity = parentElement.childNodes[1].value;
+    console.log("Button", button);
+    const productSpan = document.querySelector(`.${product} .order-success`);
+    productSpan.style.display = "block";
 
+    setTimeout(() => {
+      productSpan.style.display = "none";
+      console.log(productSpan);
+    }, 4000);
+    const order = [product, quantity];
+    storeOrder(product, quantity);
+    parentElement.childNodes[1].value = "";
+    console.log(order);
+  });
+});
 
-const userName = document.querySelector('#username');
-const email = document.querySelector('#email');
-const userId = document.querySelector('#user-id');
-const orders = document.querySelector('#order-list');
-
-
-
-console.log(userName, email, userId, orders)
-userDetails.username = userName.innerHTML;
-userDetails.email = email.innerHTML;
-userDetails.userId = userId.innerHTML;
-userDetails.orders = orders.innerHTML;
-
-
-console.log(userDetails)
+const storeOrder = (product, quantity) => {
+  localStorage.setItem(product, quantity);
+  const layers = localStorage.getItem("layers");
+  const broilers = localStorage.getItem("broilers");
+  const chicks = localStorage.getItem("chicks");
+  console.log("Chicks: ", chicks);
+  console.log("Broilers: ", broilers);
+  console.log("Layers: ", layers);
+  return true;
+};

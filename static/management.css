@@ -7,7 +7,7 @@
   position: relative;
 }
 .admin-nav {
-  height: 85vh;
+  height: 90vh;
   width: 250px;
   padding-left: 10px;
   /* background-color: fuchsia; */
@@ -18,7 +18,7 @@
   top: 8vh;
 }
 .admin-list {
-  height: 80%;
+  height: 90%;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -60,12 +60,14 @@
 .hidden-panel {
   display: none;
   transition: all ease-in-out 5s;
+  padding: 20px;
   /* position: absolute;
   top: 16vh; */
 }
 .active-panel {
   display: block;
   width: 100%;
+  min-height: 80vh;
   animation: rollup 2s forwards;
   border-left: 1px solid black;
   /* background-color: red; */
@@ -88,7 +90,7 @@
 }
 .flock-stats {
   /* display: flex; */
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   padding: 5px;
   color: white;
   height: 80%;
@@ -136,7 +138,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 1;
-  color: #0f0;
+  color: black;
 }
 
 .flock-stats .stat-meta {
@@ -180,7 +182,7 @@
 
 #brooders {
   height: 100vh;
-  /* background-color: aqua; */
+  background-color: aqua;
 }
 #orders {
   height: 100vh;

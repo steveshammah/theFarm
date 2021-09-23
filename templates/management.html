@@ -19,9 +19,8 @@
     <header>
       <nav>
         <ul class="nav-list">
-          <li class="nav-item"><a href="#">Explore</a></li>
           <li class="nav-item logo"><a href="/">The Farm</a></li>
-          <li class="nav-item"><a href="/admin"> Admin Panel</a></li>
+          <li class="nav-item"><a href="/#products">Explore</a></li>
         </ul>
       </nav>
     </header>
@@ -40,7 +39,10 @@
     <section class="management-container">
       <div class="admin-nav">
         <ul class="admin-list">
-          <li class="admin-func active-func">Flock</li>
+          <li class="admin-func active-func">Employees</li>
+          <li class="admin-func">Customers</li>
+          <li class="admin-func">Flock</li>
+          <li class="admin-func">Products</li>
           <li class="admin-func">Brooders</li>
           <li class="admin-func">Orders</li>
           <li class="admin-func">Feedback</li>
@@ -49,11 +51,163 @@
         </ul>
       </div>
       <section class="admin-panel">
+        <!-- Employees Panel -->
+        <section class="hidden-panel active-panel" id="employees">
+          <h1>Employees</h1>
+          <div class="employees-section">
+            <h2>Employees Section</h2>
+            <table>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Section</th>
+                <th>Rights</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Date Joined</th>
+              </tr>
+              {% for employee in employees %}
+              <tr>
+                <td>2021-{{employee[0]}}</td>
+                <td>{{employee[1]}} {{employee[2]}}</td>
+                <td>{{employee[4]}}</td>
+                <td><a href="mailto:{{employee[3]}}">{{employee[3]}}</a></td>
+                <td>{{employee[7]}}</td>
+                <td>{{employee[5]}}</td>
+                <td>{{employee[6][0:10]}}</td>
+                <td>{{employee[8]}}</td>
+                <td>{{employee[9].strftime('%d %b %Y')}}</td>
+              </tr>
+              {% endfor %}
+
+              <tr class="new-employee">
+                <form action="/new-employee" method="POST">
+                  <td>
+                    <input
+                      type="text"
+                      id=""
+                      name="employee-id"
+                      placeholder="Employee ID"
+                      title="Auto Generated"
+                      disabled
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id=""
+                      name="employee-name"
+                      placeholder="Name"
+                      required
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id=""
+                      name="employee-phone"
+                      placeholder="Phone"
+                      required
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id=""
+                      name="employee-email"
+                      placeholder="Email"
+                      disabled
+                      title="Auto Generated"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id=""
+                      name="section"
+                      placeholder="Section"
+                      required
+                    />
+                  </td>
+                  <td>
+                    <select name="rights" id="" class="btn" required>
+                      <option value="">Standard</option>
+                      <option value="">Sudo</option>
+                    </select>
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id=""
+                      name="password"
+                      placeholder="theFarm123"
+                      disabled
+                      title="Default Password"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      id=""
+                      name="active"
+                      placeholder="active"
+                      disabled
+                      title="Status"
+                    />
+                  </td>
+
+                  <td><button class="btn">+Employee</button></td>
+                </form>
+              </tr>
+            </table>
+            <div class="panel-statistics"></div>
+            <div class="update-employees"></div>
+          </div>
+        </section>
+
+        <!-- Customers Panel -->
+        <section class="hidden-panel" id="customers">
+          <h1>Customers</h1>
+          <div class="customers-section">
+            <h2>Customers Section</h2>
+            <table>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Residence</th>
+                <th>Password</th>
+                <th>Status</th>
+                <th>Date Joined</th>
+                <th>Orders Placed</th>
+              </tr>
+              {% for customer in customers %}
+              <tr>
+                <td>2021-{{customer[0]}}</td>
+                <td>{{customer[1]}} {{customer[2]}}</td>
+                <td>{{customer[4]}}</td>
+                <td><a href="mailto:{{customer[3]}}">{{customer[3]}}</a></td>
+                <td>{{customer[6]}}</td>
+                <td>{{customer[5][0:10]}}</td>
+                <td>{{customer[7]}}</td>
+                <td>{{customer[8].strftime('%d %b %Y')}}</td>
+                <td>25</td>
+              </tr>
+              {% endfor %}
+            </table>
+            <div class="panel-statistics"></div>
+            <div class="update-customers"></div>
+          </div>
+        </section>
+
         <!-- Flock Data -->
-        <section class="hidden-panel active-panel" id="flock">
+        <section class="hidden-panel" id="flock">
           <h1>Flock Statistics</h1>
           <div class="flock-section">
-            <div class="statistics">
+            <div class="panel-statistics">
               <div class="flock-stats stats">
                 <div class="main-stat">
                   <div class="spinner-circle">
@@ -126,103 +280,99 @@
           </div>
         </section>
 
+        <!-- Products Panel -->
+        <section class="hidden-panel" id="products">
+          <h1>Products</h1>
+          <div class="products-section">
+            <h2>Products Section</h2>
+            <div class="panel-statistics"></div>
+            {{flock}}
+            <div class="update-products"></div>
+          </div>
+        </section>
+
         <!-- Brooder's Data -->
         <section class="hidden-panel" id="brooders">
           <h1>Brooders Statistics</h1>
           <div class="brooders-section">
-            <div class="statistics">
-              <div class="brooder-stats stats">
-                <div class="main-stat">
-                  <div class="spinner-circle">
-                    <div class="spinner"></div>
-                    <!-- Get Latest flock addition -->
-
-                    <div class="spinner-content">{{flock[-1][1]}}</div>
-                  </div>
-                  <span
-                    ><strong>Last Purchase: </strong>{{flock[-1][3].strftime('%d
-                    %B %Y')}}</span
-                  >
-                </div>
-                <div class="stat-meta">
-                  <h4>Flock Allocation On Purchase</h4>
-                  <span><i>Brooder I: </i>100</span>
-                  <span><i>Brooder II: </i>80</span>
-                  <span><i>Brooder III: </i>100</span>
-                  <span><i>Brooder IV: </i>110</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="update-flock">
-              <div class="add-flock">
-                <h3>Add To Flock</h3>
-                <form action="/update/flock" method="POST">
-                  <input
-                    type="text"
-                    name="flock-quantity"
-                    id=""
-                    placeholder="Quantity"
-                    required
-                  />
-                  <input
-                    type="text"
-                    name="flock-price"
-                    id=""
-                    placeholder="Price"
-                    required
-                  />
-                  <input
-                    type="date"
-                    name="date-bought"
-                    id=""
-                    placeholder="Date Bought"
-                    required
-                  />
-                  <button class="btn">Update Flock</button>
-                </form>
-              </div>
-              <div class="flock-history">
-                <h3>Brooder History</h3>
-                <table>
-                  <tr>
-                    <th>Quantity<i>(Count)</i></th>
-                    <th>Price<i>(Ksh)</i></th>
-                    <th>Date Bought</th>
-                  </tr>
-                  {% for data in flock[::-1] %}
-                  <tr>
-                    <td>{{data[1]}}</td>
-                    <td>{{data[2]}}</td>
-                    <td>{{data[3].strftime('%d %b %y')}}</td>
-                  </tr>
-                  {% endfor %}
-                </table>
-              </div>
-            </div>
+            <div class="panel-statistics"></div>
+            {{brooders}}
+            <div class="update-brooder"></div>
           </div>
         </section>
 
+        <!-- Orders Panel -->
         <section class="hidden-panel" id="orders">
-          <h2>Orders</h2>
+          <h1>Orders</h1>
           <div class="orders-section">
-            <h3>Orders Section</h3>
+            <h2>Order Section</h2>
+            <table>
+              <tr>
+                <th>Order No.</th>
+                <th>Customer No.</th>
+                <th>Product Name</th>
+                <th>Count</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+
+              {% for order in orders %}
+
+              <tr>
+                <td>{{order[0]}}</td>
+                {% for customer in customers %} {% if order[1] == customer[0] %}
+                <td>{{customer[1]}} {{customer[2]}} - {{order[1]}}</td>
+                {% endif %} {% endfor %}
+
+                <td>{{order[2]}}</td>
+                <td>{{order[3]}}</td>
+                <td>{{order[4]}}</td>
+                <td>Pending</td>
+              </tr>
+
+              {% endfor %}
+            </table>
+            <div class="panel-statistics"></div>
+            <div class="update-orders"></div>
           </div>
         </section>
+
+        <!-- Location Panel -->
         <section class="hidden-panel" id="location">
-          <h2>Location</h2>
+          <h1>Location</h1>
+          <div class="location-section">
+            <h2>Location Section</h2>
+            <div class="panel-statistics"></div>
+            {{location}}
+            <div class="update-location"></div>
+          </div>
         </section>
+
+        <!-- Feedback Panel -->
         <section class="hidden-panel" id="feedback">
-          <h2>Feedback</h2>
+          <h1>Feedback</h1>
+          <div class="feedback-section">
+            <h2>Feedback Section</h2>
+            <div class="panel-statistics"></div>
+            {{feedback}}
+            <div class="update-feedback"></div>
+          </div>
         </section>
+
+        <!-- Statistics Panel -->
         <section class="hidden-panel" id="statistics">
-          <h2>Statistics</h2>
+          <h1>Statistics</h1>
+          <div class="statistics-section">
+            <h2>Statistics Section</h2>
+            <div class="panel-statistics"></div>
+            {{flock}} {{brooders}} {{orders}} {{employees}} {{feedback}}
+            {{customers}}
+
+            <div class="update-statistics"></div>
+          </div>
         </section>
       </section>
     </section>
-
-    <!-- <a href="#" style="float: right">Back To Top</a> -->
-    <!-- <br /> -->
     <footer>
       <div class="sponsors">Lorem ipsum dolor sit amet consectetur.</div>
       <span class="copyright"> Copyright&copy; Shammah 2021</span>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../static/resources/chicken.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/customer.css" />
+    <title>User Profile</title>
+  </head>
+
+  <body>
+    <header>
+      <nav>
+        <ul class="nav-list">
+          <li class="nav-item logo"><a href="/">The Farm</a></li>
+          <li class="nav-item"><a href="/#products">Explore</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <ul class="user-nav">
+      <li>
+        <a href="/customer"> {{username}} </a>
+        <div class="online"></div>
+      </li>
+      <li>
+        <a href="/{{username}}/orders">Cart/Orders</a>
+      </li>
+      <li><a href="/login">Log Out</a></li>
+    </ul>
+    <section class="settings-section">
+      <h4><strong>Profile Settings</strong></h4>
+      {% for info in user %}
+      <div class="column-input">
+        <form action="/settings" method="POST">
+          <span
+            ><strong>First name: </strong>
+            <input
+              type="text"
+              class="form-control"
+              name="first-name"
+              value="{{info[1]}}"
+            />
+          </span>
+
+          <span
+            ><strong>Last name: </strong>
+            <input
+              type="text"
+              class="form-control"
+              name="last-name"
+              value="{{info[2]}}"
+            />
+          </span>
+
+          <span
+            ><strong>Email: </strong>
+            <input
+              type="email"
+              class="form-control"
+              name="first-name"
+              value="{{info[3]}}"
+            />
+          </span>
+
+          <span
+            ><strong>Phone: </strong>
+            <input
+              type="text"
+              class="form-control"
+              name="last-name"
+              value="{{info[4]}}"
+            />
+          </span>
+
+          <button type="submit" class="btn btn-dark">Edit Profile</button>
+        </form>
+      </div>
+      {% endfor %}
+      <hr />
+      <br />
+      <div class="deactivation-container">
+        <h3>Profile Deactivation</h3>
+        {% for name in data %}
+        <strong>{{name[1]}} {{name[2]}}</strong>
+        {% endfor %}<br />
+        Would you like to delete your profile?
+        <form action="#">
+          <input
+            type="password"
+            name="password"
+            class="form-control"
+            style="width: 300px"
+            placeholder="Enter password"
+            required
+          /><br />
+          Are you sure? &nbsp;&nbsp;<input type="checkbox" /><br />
+          <button type="button" class="btn btn-danger">Delete Account</button>
+        </form>
+        <br />
+        <em>Be careful. The action once complete cannot be undone.</em><br />
+        <em>Hope to see you soon.</em>
+        <br />
+      </div>
+    </section>
+    <hr />
+    <br />
+  </body>
+</html>

@@ -84,21 +84,6 @@ def employee_login():
             return render_template('employee-login.html')
 
 
-@app.route('/admin')
-def admin():
-    try:
-        admin_email = session['email']
-        username = admin_email.split('@')[0]
-        admin_id = session['employee_id']
-        admin = Admin(admin_email)
-        employees = admin.employee_table()
-        customers = admin.customers_table()
-        orders = admin.orders_table()
-        return render_template('admin.html', employees=employees, customers=customers, orders=orders, email=admin_email, username=username)
-    except KeyError:
-        return redirect('employee_login')
-
-
 # Make use of URL
 @app.route('/management', methods=['GET', 'POST'])
 def management():
@@ -157,7 +142,7 @@ def employee():
         employee_id = session['employee_id']
         # print('EMPLOYEE ID: ', employee_id)
         my_details = Admin(employee_email).my_details(employee_id)
-        orders = Admin(employee_email).orders_by_id(employee_id)
+        orders = Admin(employee_email).get_orders_by_id(employee_id)
         return render_template('employee.html', employee_details=my_details[0], email=employee_email, orders=orders)
     except KeyError:
         return redirect('employee_login')
@@ -175,7 +160,7 @@ def health():
         else:
             pass
     except KeyError:
-        redirect(url_for('employee-login'))
+        redirect(url_for('employee_login'))
 
 
 # Brooder Worker Section
@@ -191,7 +176,7 @@ def brooder():
         else:
             pass
     except KeyError:
-        redirect(url_for('employee-login'))
+        redirect(url_for('employee_login'))
 
 # CUSTOMER SECTION
 @app.route('/login', methods=['GET', 'POST'])
@@ -221,16 +206,23 @@ def customer_login():
             return render_template('customer-login.html')
 
 
+@app.route('/<string:username>/settings', methods=['POST', 'GET'])
+def settings(username):
+    user_email = session['email']
+    user_data = Admin(user_email).user_details()
+    return render_template('settings.html', user=user_data, username=username)
+
+
 @app.route('/customer')
 def customer():
     try:
         email = session['email']
         customer_details = User(email).user_details()[0]
         session['customer_id'] = customer_details[0]            # set user ID in session
-        session['username'] = customer_details[1]            # set user ID in session
+        session['username'] = customer_details[1]         # set user ID in session
         print(customer_details)
         print(session)
-        orders = Admin(email).orders_by_id(session['customer_id'])      # Fetch user's orders
+        orders = Admin(email).get_orders_by_id(session['customer_id'])      # Fetch user's orders
         # print('ORDERS', orders == True)
 
         # Check if user has orders and sort them
@@ -265,6 +257,24 @@ def order(product_name):
     orders = Admin(email).orders_by_id(session['customer_id'])
     message = 'ORDER HAS BEEN PLACED!'
     return render_template('customer.html', customer_details=customer_details, orders=orders, message=message)
+
+
+@app.route('/<string:username>/orders', methods=['GET', 'POST'])
+def my_orders(username):
+    try:
+        if request.method == 'GET':
+            customer_email = session['email']
+            username = customer_email.split('@')[0]
+            customer_id = session['customer_id']
+            customer = Admin(customer_email)
+            orders = customer.get_orders_by_id(customer_id)
+            print(orders)
+            return render_template('customer-orders.html', orders=orders, username=username)
+
+        else:
+            pass
+    except KeyError:
+        return redirect('employee_login')
 
 
 if __name__ == '__main__':

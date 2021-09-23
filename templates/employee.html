@@ -19,29 +19,31 @@
     <header>
       <nav>
         <ul class="nav-list">
-          <li class="nav-item"><a href="#">Explore</a></li>
           <li class="nav-item logo"><a href="/">The Farm</a></li>
-          <!-- Check if user email contains admin to display url -->
-          {% if 'admin' in employee_details[0]%}
-          <li class="nav-item"><a href="/admin"> Admin Panel</a></li>
-          {% endif %}
+          <li class="nav-item"><a href="/#products">Explore</a></li>
+
         </ul>
       </nav>
     </header>
     <div class="navigation">
       <ul class="user-nav">
-        <li><a href="/employee">{{employee_details[3][0]}}{{employee_details[4] }}</a><div class="online"></div></li>
+        <li>
+          <a href="/employee"
+            >{{employee_details[3][0]}}{{employee_details[4] }}</a
+          >
+          <div class="online"></div>
+        </li>
         <li><a href="/employee/brooder"> Brooders </a></li>
         <li><a href="/employee/health">Health Centre</a></li>
+        {% if 'admin' in email %}
+        <li><a href="/management">Management</a></li>
+        {% endif %}
         <li><a href="/employee_login">Log Out</a></li>
       </ul>
     </div>
     <section class="profile-container">
       <div class="employee-details">
-        <span
-          >
-          {{employee_details[3]}} {{employee_details[4]}}</span
-        >
+        <span> {{employee_details[3]}} {{employee_details[4]}}</span>
         <span
           ><h4>Email:</h4>
           {{employee_details[0]}}</span
@@ -51,9 +53,9 @@
           {{employee_details[5]}}</span
         >
         <span
-        ><h3>Role:</h3>
-        {{employee_details[6]}}</span
-      >
+          ><h3>Role:</h3>
+          {{employee_details[6]}}</span
+        >
         <span
           ><h3>Rights:</h3>
           {{employee_details[2]}}</span
@@ -68,50 +70,48 @@
         <div class="brooders-container">
           <div class="brooder">
             <h2>Brooder I</h2>
-           <span><strong>Initial Count:</strong> 250</span>
-           <span><strong>Current Count:</strong> 100</span>
-           <span><strong>Date Updated:</strong> 22/09/2021</span>
-           <span><strong>Last Vaccination:</strong> 22/09/2021</span>
-           <span><strong>Last Cleaning:</strong> 21/09/2021</span>
+            <span><strong>Initial Count:</strong> 250</span>
+            <span><strong>Current Count:</strong> 100</span>
+            <span><strong>Date Updated:</strong> 22/09/2021</span>
+            <span><strong>Last Vaccination:</strong> 22/09/2021</span>
+            <span><strong>Last Cleaning:</strong> 21/09/2021</span>
           </div>
 
           <div class="brooder">
             <h2>Brooder II</h2>
-           <span><strong>Initial Count:</strong> 250</span>
-           <span><strong>Current Count:</strong> 100</span>
-           <span><strong>Date Updated:</strong> 22/09/2021</span>
-           <span><strong>Last Vaccination:</strong> 22/09/2021</span>
-           <span><strong>Last Cleaning:</strong> 21/09/2021</span>
+            <span><strong>Initial Count:</strong> 250</span>
+            <span><strong>Current Count:</strong> 100</span>
+            <span><strong>Date Updated:</strong> 22/09/2021</span>
+            <span><strong>Last Vaccination:</strong> 22/09/2021</span>
+            <span><strong>Last Cleaning:</strong> 21/09/2021</span>
           </div>
 
           <div class="brooder">
             <h2>Brooder III</h2>
-           <span><strong>Initial Count:</strong> 250</span>
-           <span><strong>Current Count:</strong> 100</span>
-           <span><strong>Date Updated:</strong> 22/09/2021</span>
-           <span><strong>Last Vaccination:</strong> 22/09/2021</span>
-           <span><strong>Last Cleaning:</strong> 21/09/2021</span>
+            <span><strong>Initial Count:</strong> 250</span>
+            <span><strong>Current Count:</strong> 100</span>
+            <span><strong>Date Updated:</strong> 22/09/2021</span>
+            <span><strong>Last Vaccination:</strong> 22/09/2021</span>
+            <span><strong>Last Cleaning:</strong> 21/09/2021</span>
           </div>
 
           <div class="brooder">
             <h2>Brooder IV</h2>
-           <span><strong>Initial Count:</strong> 250</span>
-           <span><strong>Current Count:</strong> 100</span>
-           <span><strong>Date Updated:</strong> 22/09/2021</span>
-           <span><strong>Last Vaccination:</strong> 22/09/2021</span>
-           <span><strong>Last Cleaning:</strong> 21/09/2021</span>
+            <span><strong>Initial Count:</strong> 250</span>
+            <span><strong>Current Count:</strong> 100</span>
+            <span><strong>Date Updated:</strong> 22/09/2021</span>
+            <span><strong>Last Vaccination:</strong> 22/09/2021</span>
+            <span><strong>Last Cleaning:</strong> 21/09/2021</span>
           </div>
-
-          
         </div>
       </div>
     </section>
 
-    <a href="#" style="float: right;">Back To Top</a>
-    <br>
+    <a href="#" style="float: right">Back To Top</a>
+    <br />
     <footer>
-        <div class="sponsors">Lorem ipsum dolor sit amet consectetur. </div>
-        <span class="copyright"> Copyright&copy; Shammah 2021</span>
+      <div class="sponsors">Lorem ipsum dolor sit amet consectetur.</div>
+      <span class="copyright"> Copyright&copy; Shammah 2021</span>
     </footer>
     <script src="../static/main.js"></script>
   </body>

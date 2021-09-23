@@ -337,7 +337,7 @@ class Admin(User):
             cursor.execute(orders_sql)
             return cursor.fetchall()
 
-    def orders_by_id(self, customer_id: int):
+    def get_orders_by_id(self, customer_id: int):
         with DbManager(**DBCONFIG) as cursor:
             orders_by_sql = '''SELECT * FROM orders WHERE customer_id = %s'''
             cursor.execute(orders_by_sql, (customer_id, ))

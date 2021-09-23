@@ -1,118 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="../static/management.css">
-    <link rel="stylesheet" href="../static/adminPanel.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/management.css" />
+    <link rel="stylesheet" href="../static/adminPanel.css" />
     <title>The Farm</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <nav>
-            <ul class="nav-list">
-                <li class="nav-item logo"><a href="/">The Farm</a></li>
-                {% if 'admin' in email %}
-                <li class="nav-item"><a href="/admin"> Admin</a></li>
-                {% endif %}
-            </ul>
-        </nav>
+      <nav>
+        <ul class="nav-list">
+          <li class="nav-item logo"><a href="/">The Farm</a></li>
+          <li class="nav-item"><a href="/#products">Explore</a></li>
+        </ul>
+      </nav>
     </header>
     <div class="navigation">
-        <ul class="user-nav">
-            <li><a href="/employee">Hello: {{username}}</a> <div class="online"></div></li>
-            <li><a href="/employee/health">Health Centre</a></li>
-            <li><a href="/employee_login">Log Out</a></li>
-        </ul>
+      <ul class="user-nav">
+        <li>
+          <a href="/employee">Hello: {{username}}</a>
+          <div class="online"></div>
+        </li>
+        <li><a href="/employee/health">Health Centre</a></li>
+        {% if 'admin' in email %}
+        <li><a href="/management">Management</a></li>
+        {% endif %}
+        <li><a href="/employee_login">Log Out</a></li>
+      </ul>
     </div>
- <h1>Brooder Worker</h1>
+    <h1>Brooder Worker</h1>
 
+    <section class="brooder-container">
+      <div class="brooder-updates">
+        <div class="feeds-section">
+          <h2>Feeds</h2>
+          <form action="#" method="POST">
+            Name:
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Feeds name"
+              name="feeds-name"
+            />
+            Quantity<input
+              type="text"
+              class="form-control"
+              placeholder="in Kgs"
+              name="quantity"
+            />
+            Date<input type="date" name="date" />
+          </form>
+        </div>
 
- <section class="brooder-container">
-    <div class="brooder-updates">
-     <div class="feeds-section">
-         <h2>Feeds</h2>
-         <form action="#" method="POST">
-            Name: <input type="text" class="form-control" placeholder="Feeds name" name='feeds-name'>
-            Quantity<input type="text" class="form-control" placeholder="in Kgs" name="quantity">
-            Date<input type="date" name='date'>
-         </form>
-     </div>
-
-     <div class="feeds-usage">
-        <h2>Feeds Usage</h2>
-        <form action="#" method="POST">
-           Brooder: <select name="feeds-usage" id="">
-                <option value="brooder-one">One</option>
-                <option value="brooder-two">Two</option>
-                <option value="brooder-three">Three</option>
-                <option value="brooder-four">Four</option>
+        <div class="feeds-usage">
+          <h2>Feeds Usage</h2>
+          <form action="#" method="POST">
+            Brooder:
+            <select name="feeds-usage" id="">
+              <option value="brooder-one">One</option>
+              <option value="brooder-two">Two</option>
+              <option value="brooder-three">Three</option>
+              <option value="brooder-four">Four</option>
             </select>
-            Name<input type="text" class="form-control" placeholder="Feed name" name="name">
-            Quantity: <input type="number" name="feeds-count" id="" placeholder="'in Kgs">
-            Date<input type="date" name='date'>
+            Name<input
+              type="text"
+              class="form-control"
+              placeholder="Feed name"
+              name="name"
+            />
+            Quantity:
+            <input
+              type="number"
+              name="feeds-count"
+              id=""
+              placeholder="'in Kgs"
+            />
+            Date<input type="date" name="date" />
+          </form>
+        </div>
 
-        </form>
-    </div>
- 
-     <div class="cleaning">
-         <h2>Cleaning Cycle</h2>
-         <form action="#" method="POST">
-            Brooder: <select name="vaccination" id="">
-                <option value="brooder-one">One</option>
-                <option value="brooder-two">Two</option>
-                <option value="brooder-three">Three</option>
-                <option value="brooder-four">Four</option>
+        <div class="cleaning">
+          <h2>Cleaning Cycle</h2>
+          <form action="#" method="POST">
+            Brooder:
+            <select name="vaccination" id="">
+              <option value="brooder-one">One</option>
+              <option value="brooder-two">Two</option>
+              <option value="brooder-three">Three</option>
+              <option value="brooder-four">Four</option>
             </select>
-            Last Cleaning Date<input type="date" name='date'>
-         </form>
-     </div>
-    </div>
- 
-    <div class="brooder-stats" id="brooder-stats">
-     <h2>Brooder Statisitics</h2>
-         <table>
-             <tr>
-                 <td>
-                     <h3>Brooder Count</h3>
-                 </td>
-                 <td>
-                     <h3> Feeds In Stock </h3>
-                 </td>
-                 <td>
-                     <h3> Cleaning History</h3>
-                 </td>
-             </tr>
-             <tr>
-                <td>
-                    
-                </td>
-                <td>
-                  
-                </td>
-                <td>
-              
-                </td>
-             </tr>
-         </table>
- </div>
-  </section>
+            Last Cleaning Date<input type="date" name="date" />
+          </form>
+        </div>
+      </div>
 
- 
-    <br>
-    <a href="#" style="float: right;">Back To Top</a>
-    <br>
+      <div class="brooder-stats" id="brooder-stats">
+        <h2>Brooder Statisitics</h2>
+        <table>
+          <tr>
+            <td>
+              <h3>Brooder Count</h3>
+            </td>
+            <td>
+              <h3>Feeds In Stock</h3>
+            </td>
+            <td>
+              <h3>Cleaning History</h3>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </section>
+
+    <br />
+    <a href="#" style="float: right">Back To Top</a>
+    <br />
     <footer>
-        <div class="sponsors">Lorem ipsum dolor sit amet consectetur. </div>
-        <span class="copyright"> Copyright&copy; Shammah 2021</span>
+      <div class="sponsors">Lorem ipsum dolor sit amet consectetur.</div>
+      <span class="copyright"> Copyright&copy; Shammah 2021</span>
     </footer>
     <script src="../static/main.js"></script>
-</body>
-
+  </body>
 </html>
