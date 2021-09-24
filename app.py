@@ -197,7 +197,7 @@ def customer_login():
             return redirect('customer')
             # return render_template('customer.html', customer_details=customer_details)
         elif customer.log_in(password) == 'Wrong Password':
-            message = 'Wrong password!'
+            message = 'Wrong password!`'
             return render_template('customer-login.html', message=message)
         elif customer.log_in(password) == 'Email Not Found':
             message = 'Email Not Found!'

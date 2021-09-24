@@ -1,8 +1,6 @@
 const orderButton = document.querySelectorAll(".order-form .btn");
 console.log(orderButton);
 
-let order = {};
-
 orderButton.forEach((button) => {
   button.addEventListener("click", (e) => {
     const parentElement = button.parentElement;
@@ -19,6 +17,8 @@ orderButton.forEach((button) => {
       console.log(productSpan);
     }, 4000);
     const order = [product, quantity];
+    console.log("SAVING ORDERS");
+
     storeOrder(product, quantity);
     parentElement.childNodes[1].value = "";
     console.log(order);
@@ -27,11 +27,30 @@ orderButton.forEach((button) => {
 
 const storeOrder = (product, quantity) => {
   localStorage.setItem(product, quantity);
+  updateOrders();
+  return true;
+};
+
+const updateOrders = () => {
   const layers = localStorage.getItem("layers");
   const broilers = localStorage.getItem("broilers");
   const chicks = localStorage.getItem("chicks");
-  console.log("Chicks: ", chicks);
-  console.log("Broilers: ", broilers);
-  console.log("Layers: ", layers);
-  return true;
+  const costSum = layers + broilers + chicks;
+  const quantitySum = Number(layers) + Number(broilers) + Number(chicks);
+
+  // Dom Elements to update
+  const layersOrders = document.querySelector(".layers-orders");
+  const broilersOrders = document.querySelector(".broilers-orders");
+  const chicksOrders = document.querySelector(".chicks-orders");
+  const totatCost = document.querySelector(".total-cost");
+  const totalQuantity = document.querySelector(".total-quantity");
+
+  // console.log(layersOrders);
+  totatCost.innerText = costSum;
+  totalQuantity.innerText = quantitySum;
+  layersOrders.innerText = layers;
+  broilersOrders.innerText = broilers;
+  chicksOrders.innerText = chicks;
 };
+
+updateOrders();

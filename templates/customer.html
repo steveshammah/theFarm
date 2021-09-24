@@ -45,43 +45,70 @@
     </ul>
     <section class="user-section">
       <div class="user-details">
-        <div class="user-info">
-          <h3>User Information</h3>
-          <br />
-          <span
-            ><strong>Username: </strong>
-            <small id="username"
-              >{{customer_details[1]}} {{customer_details[2]}}</small
-            ></span
-          >
-          <span
-            ><strong>UserId: </strong>
-            <small id="user-id">{{customer_details[0]}} </small></span
-          >
-          <span
-            ><strong>Phone: </strong
-            ><small id="phone">{{customer_details[4]}}</small></span
-          >
-          <span
-            ><strong>Email: </strong
-            ><small id="email">{{customer_details[3]}}</small></span
-          >
-          <span
-            ><strong>Location: </strong>
-            <small id="location">{{customer_details[6]}}</small></span
-          >
-          <span
-            ><strong>Password: </strong
-            ><small>{{customer_details[5][:10]}}</small></span
-          >
-          <button class="btn"><a href="tel:0712345678"> Call </a></button>
-        </div>
+        <div class="profile-container">
+          <div class="user-info">
+            <h3>User Information</h3>
+            <br />
+            <span>
+              <small id="username"
+                >{{customer_details[1]}} {{customer_details[2]}}</small
+              ></span
+            >
+            <span
+              ><small id="email">{{customer_details[3]}}</small>
+              &nbsp;&nbsp;<small id="phone"
+                >{{customer_details[4]}}</small
+              ></span
+            >
+            <span> <small id="location">{{customer_details[6]}}</small></span>
+            <button class="btn">
+              <a href="#"> Edit profile </a>
+            </button>
+          </div>
+          <div class="profile-settings settings-active">
+            <h3>Settings</h3>
+            <br />
+            <span>
+              <strong>Name: </strong>
+              <input
+                class="username"
+                value="{{customer_details[1]}} {{customer_details[2]}}"
+            /></span>
 
+            <span>
+              <strong>Email: </strong>
+              <input class="email" value="{{customer_details[3]}}" type="email"
+            /></span>
+
+            <span>
+              <strong>Phone: </strong>
+              <input class="phone" value="{{customer_details[4]}}" type="text"
+            /></span>
+
+            <span>
+              <strong>Location: </strong>
+              <input
+                class="location-data"
+                placeholder="{{customer_details[6]}}"
+                type="text"
+            /></span>
+            <span>
+              <button class="btn">
+                <a href="#"> Save </a>
+              </button>
+              <button class="btn">
+                <a href="#"> Cancel </a>
+              </button>
+            </span>
+          </div>
+        </div>
         <div class="order-summary">
           <h3>Order Details</h3>
           <br />
-          <span><strong>Orders:</strong> <small>23</small></span>
-          <span><strong>Pending: </strong><small>6</small></span>
+          <span
+            ><strong>Pending:</strong> <small class="total-quantity"></small
+          ></span>
+          <span><strong>Cost: </strong><small class="total-cost"></small></span>
           <span><strong>Delivered: </strong><small>17</small></span>
           <!-- {{orders}} -->
           {%for order in orders%}
