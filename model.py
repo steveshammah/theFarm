@@ -373,6 +373,13 @@ class Admin(User):
             brooder_data = cursor.fetchall()
             return brooder_data
 
+    def save_feedback(self, customer_id, content):
+        with DbManager(**DBCONFIG) as cursor:
+            SQL = '''INSERT INTO feedback (customer_id, feedback_details) VALUES (%s, %s)'''
+            print('FEEDBACK LOGGED')
+            cursor.execute(SQL, (customer_id, content))
+            return True
+
     def feedback_table(self):
         with DbManager(**DBCONFIG) as cursor:
             SQL = '''SELECT * FROM feedback'''

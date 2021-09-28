@@ -10,12 +10,14 @@ app.secret_key = 'thesecretkey'
 def home():
     try:
         user_email = session['email']
+        admin = Admin('guest@theFarm.co.ke')
+        feedbacks = admin.feedback_table()[::-1]
         if '@theFarm.co.ke' in user_email:
-            return render_template('landing.html', employee_email=user_email)
+            return render_template('landing.html', employee_email=user_email, feedbacks=feedbacks)
         else:
-            return render_template('landing.html', customer_email=user_email)
+            return render_template('landing.html', customer_email=user_email, feedbacks=feedbacks)
     except KeyError:
-        return render_template('landing.html')
+        return render_template('landing.html', feedbacks=feedbacks)
 
 
 @app.route('/signup', methods=['GET', 'POST'])
@@ -98,11 +100,11 @@ def management():
             flock = admin.flock_table()
             brooders = admin.brooders_table()
             orders = admin.orders_table()
-            feedback = admin.feedback_table()
+            feedbacks = admin.feedback_table()
             employees = admin.employee_table()
             customers = admin.customers_table()
             return render_template('management.html', flock=flock, brooders=brooders, orders=orders,
-                                   feedback=feedback, employees=employees, customers=customers, admin=admin)
+                                   feedbacks=feedbacks, employees=employees, customers=customers, admin=admin)
     except KeyError:
         redirect(url_for('employee_login'))
 
@@ -154,7 +156,7 @@ def health():
     try:
         employee_id = session['employee_id']
         employee_email = session['email']
-        username = employee_email.split('@')[0]
+        username = session['username']
         if request.method == 'GET':
             return render_template('healthSpecialist.html', username=username, email=employee_email)
         else:
@@ -169,7 +171,7 @@ def brooder():
     try:
         employee_id = session['employee_id']
         employee_email = session['email']
-        username = employee_email.split('@')[0]
+        username = session['username']
 
         if request.method == 'GET':
             return render_template('brooderWorker.html', username=username, email=employee_email)
@@ -177,6 +179,7 @@ def brooder():
             pass
     except KeyError:
         redirect(url_for('employee_login'))
+
 
 # CUSTOMER SECTION
 @app.route('/login', methods=['GET', 'POST'])
@@ -219,8 +222,9 @@ def customer():
     try:
         email = session['email']
         customer_details = User(email).user_details()[0]
+        username = email.split('@')[0]
         session['customer_id'] = customer_details[0]            # set user ID in session
-        session['username'] = customer_details[1]         # set user ID in session
+        session['username'] = username       # set user ID in session
         # print(customer_details)
         # print(session)
         orders = Admin(email).get_orders_by_id(session['customer_id'])      # Fetch user's orders
@@ -233,9 +237,9 @@ def customer():
             cocks = Admin(email).sort_orders('cocks', session['customer_id'])
             order_list = [chicks, layers, cocks]
             # print('ORDER LIST: ', order_list)
-            return render_template('customer.html', customer_details=customer_details, orders=orders, order_list=order_list)
+            return render_template('customer.html', username=username, customer_details=customer_details, orders=orders, order_list=order_list)
         else:
-            return render_template('customer.html', customer_details=customer_details, orders=orders)
+            return render_template('customer.html', username=username, customer_details=customer_details, orders=orders)
 
     except KeyError:
         return render_template('customer-login.html')
@@ -257,7 +261,7 @@ def my_orders():
     try:
         if request.method == 'GET':
             customer_email = session['email']
-            username = customer_email.split('@')[0]
+            username = session['username']
             customer_id = session['customer_id']
             customer = Admin(customer_email)
             orders = customer.get_orders_by_id(customer_id)
@@ -267,6 +271,17 @@ def my_orders():
             pass
     except KeyError:
         return redirect('employee_login')
+
+
+# User Feedback
+@app.route('/feedback', methods=['POST'])
+def feedback():
+    customer_email = session['email']
+    customer_id = session['customer_id']
+    content = request.form['feedback-content']
+    customer = Admin(customer_email)
+    customer.save_feedback(customer_id, content)
+    return redirect(url_for('customer'))
 
 
 # Run app

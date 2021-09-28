@@ -1,189 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="../static/resources/chicken.ico">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../static/style.css">
-    <link rel="stylesheet" href="../static/media.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="../static/resources/chicken.ico" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/media.css" />
     <title>The Farm</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <section class="landing">
-        <div class="landing-text">
-            <h1>The Farm Org.</h1>
-            <p>For all your chicken needs.</p>
-        </div>
+      <div class="landing-text">
+        <h1>The Farm Org.</h1>
+        <p>For all your chicken needs.</p>
+      </div>
     </section>
     <header>
-        <div class="burger">
-            <div class="line"></div>
-            <div class="line middle"></div>
-            <div class="line"></div>
+      <div class="burger">
+        <div class="line"></div>
+        <div class="line middle"></div>
+        <div class="line"></div>
+      </div>
+
+      <nav>
+        <ul class="nav-list">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#products">Products</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#review">Reviews</a></li>
+        </ul>
+        <div class="profile">
+          <a href="/employee_login"> Employee Login</a>
         </div>
-
-        <nav>
-            <ul class="nav-list">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#review">Reviews</a></li>
-            </ul>
-            <div class="profile">
-                <a href="/employee_login"> Employee Login</a>
-            </div>
-
-        </nav>
+      </nav>
     </header>
 
     <section class="home-page" id="home">
-        <section class="home-image">
-            <img src="../static/resources/chicken-farm.jpg" alt="COOL IMAGE">
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis, ratione facilis minus dolore
-                minima saepe!</p>
-        </section>
-        <div class="home-text">
-            <h2>Welcome to The Farm</h2>
-            <p>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni placeat maxime laudantium veritatis
-                velit sequi, explicabo esse dolores illo ducimus optio id eaque consequuntur nihil. Voluptates
-                necessitatibus assumenda ex dignissimos architecto ipsum, commodi provident rerum.
-
-            </p>
-            <br>
-            <div class="landing-buttons">
-                <!-- CHECK IF USER IS LOGED IN -->
-                {% if customer_email %}
-                <button class="btn"><a href="/customer">MY PROFILE</a></button>
-                <button class="btn"><a href="/login">LOG OUT</a></button>
-                {% elif  employee_email %}
-                <button class="btn"><a href="/employee">MY PROFILE</a></button>
-                <button class="btn"><a href="/login">LOG OUT</a></button>
-                {% else %}
-                <button class="btn"><a href="/signup">SIGN UP</a></button>
-                <button class="btn"><a href="/login">LOG IN</a></button>
-            {% endif %}
+      <section class="home-image">
+        <img src="../static/resources/chicken-farm.jpg" alt="COOL IMAGE" />
+        <p>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis,
+          ratione facilis minus dolore minima saepe!
+        </p>
+      </section>
+      <div class="home-text">
+        <h2>Welcome to The Farm</h2>
+        <p>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni
+          placeat maxime laudantium veritatis velit sequi, explicabo esse
+          dolores illo ducimus optio id eaque consequuntur nihil. Voluptates
+          necessitatibus assumenda ex dignissimos architecto ipsum, commodi
+          provident rerum.
+        </p>
+        <br />
+        <div class="landing-buttons">
+          <!-- CHECK IF USER IS LOGED IN -->
+          {% if customer_email %}
+          <button class="btn"><a href="/customer">MY PROFILE</a></button>
+          <button class="btn"><a href="/login">LOG OUT</a></button>
+          {% elif employee_email %}
+          <button class="btn"><a href="/employee">MY PROFILE</a></button>
+          <button class="btn"><a href="/login">LOG OUT</a></button>
+          {% else %}
+          <button class="btn"><a href="/signup">SIGN UP</a></button>
+          <button class="btn"><a href="/login">LOG IN</a></button>
+          {% endif %}
         </div>
-
-        </div>
-        <a href="#review" class="scroll-link">Reviews</a>
+      </div>
+      <a href="#review" class="scroll-link">Reviews</a>
     </section>
 
     <section class="product-container" id="products">
-        <span class="container-title">
-            <hr>
-            <h1>PRODUCTS</h1>
-            <hr>
-        </span>
-        <div class="product">
-            <div class="product-text">
-                <h2>Broilers</h2>
+      <span class="container-title">
+        <hr />
+        <h1>PRODUCTS</h1>
+        <hr />
+      </span>
+      <div class="product">
+        <div class="product-text">
+          <h2>Broilers</h2>
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet architecto provident libero nemo?
-                    Provident commodi consectetur sunt eos, architecto officiis necessitatibus quod ipsa eaque porro
-                    eveniet tenetur placeat blanditiis voluptatum et quaerat!</p>
-            </div>
-            <img src="../static/resources/cock.jpg" alt="" class="about-img">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+            architecto provident libero nemo? Provident commodi consectetur sunt
+            eos, architecto officiis necessitatibus quod ipsa eaque porro
+            eveniet tenetur placeat blanditiis voluptatum et quaerat!
+          </p>
         </div>
+        <img src="../static/resources/cock.jpg" alt="" class="about-img" />
+      </div>
 
-        <div class="product">
-            <div class="product-text">
-                <h2>Chicks</h2>
+      <div class="product">
+        <div class="product-text">
+          <h2>Chicks</h2>
 
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet architecto provident libero nemo?
-                    Provident commodi consectetur sunt eos, architecto officiis necessitatibus quod ipsa eaque porro
-                    eveniet tenetur placeat blanditiis voluptatum et quaerat!</p>
-            </div>
-            <img src="../static/resources/chick.jpg" alt="" class="about-img">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+            architecto provident libero nemo? Provident commodi consectetur sunt
+            eos, architecto officiis necessitatibus quod ipsa eaque porro
+            eveniet tenetur placeat blanditiis voluptatum et quaerat!
+          </p>
         </div>
+        <img src="../static/resources/chick.jpg" alt="" class="about-img" />
+      </div>
     </section>
 
     <section class="review-container" id="review">
-        <span class="container-title">
-            <hr>
-            <h1>REVIEWS</h1>
-            <hr>
-        </span>
-        <div class="reviews">
+      <span class="container-title">
+        <hr />
+        <h1>REVIEWS</h1>
+        <hr />
+      </span>
+      <div class="reviews">
+        {% for feedback in feedbacks %}
         <div class="review">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sunt, enim laborum nemo deleniti
-                et.</p>
-            <span>- Nairobi, Kenya</span>
+          <p>{{feedback[2]}}.</p>
+          <span>{{feedback[4].strftime('%d %b %Y')}}</span>
         </div>
-
-        <div class="review">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sunt, enim laborum nemo deleniti
-                et.</p>
-            <span>- Nairobi, Kenya</span>
-        </div>
-
-        <div class="review">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sunt, enim laborum nemo deleniti
-                et.</p>
-            <span>- Nairobi, Kenya</span>
-        </div>
-        <div class="review">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sunt, enim laborum nemo deleniti
-                et.</p>
-            <span>- Nairobi, Kenya</span>
-        </div>
-
-        <div class="review">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sunt, enim laborum nemo deleniti
-                et.</p>
-            <span>- Nairobi, Kenya</span>
-        </div>
-
-        <div class="review">
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Necessitatibus sunt, enim laborum nemo deleniti
-                et.</p>
-            <span>- Nairobi, Kenya</span>
-        </div>
-    </div>
+        {% endfor %}
+      </div>
     </section>
 
     <section class="info-container" id="about">
-        <div class="info-text">
-            <div class="info">
-                <h2>INFO</h2>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Perspiciatis laudantium illum vero earum
-                    magni est voluptate architecto, nam aliquid maxime!</p>
-            </div>
-
-            <div class="info-meta">
-                <div class="info-data">
-                    <h3>LOCATION</h3>
-                    <span>Lorem, ipsum dolor.</span>
-                    <span>Lorem, ipsum dolor.</span>
-                </div>
-
-                <div class="info-data">
-                    <h3>HOURS</h3>
-                    <span>Lorem, ipsum dolor.</span>
-                    <span>Lorem, ipsum dolor.</span>
-                </div>
-
-                <div class="info-data">
-                    <h3>CONTACT</h3>
-                    <span>Lorem, ipsum dolor.</span>
-                    <span>Lorem, ipsum dolor.</span>
-                </div>
-            </div>
-
+      <div class="info-text">
+        <div class="info">
+          <h2>INFO</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+            Perspiciatis laudantium illum vero earum magni est voluptate
+            architecto, nam aliquid maxime!
+          </p>
         </div>
-        <a href="/#home" class="scroll-link">Back To Top</a>
+
+        <div class="info-meta">
+          <div class="info-data">
+            <h3>LOCATION</h3>
+            <span>Lorem, ipsum dolor.</span>
+            <span>Lorem, ipsum dolor.</span>
+          </div>
+
+          <div class="info-data">
+            <h3>HOURS</h3>
+            <span>Lorem, ipsum dolor.</span>
+            <span>Lorem, ipsum dolor.</span>
+          </div>
+
+          <div class="info-data">
+            <h3>CONTACT</h3>
+            <span>Lorem, ipsum dolor.</span>
+            <span>Lorem, ipsum dolor.</span>
+          </div>
+        </div>
+      </div>
+      <a href="/#home" class="scroll-link">Back To Top</a>
     </section>
 
     <footer>
-        <div class="sponsors">Lorem ipsum dolor sit amet consectetur. </div>
-        <span class="copyright"> Copyright&copy; Shammah 2021</span>
+      <div class="sponsors">Lorem ipsum dolor sit amet consectetur.</div>
+      <span class="copyright"> Copyright&copy; Shammah 2021</span>
     </footer>
-    <script  src="../static/main.js"></script>
-</body>
-
+    <script src="../static/main.js"></script>
+  </body>
 </html>

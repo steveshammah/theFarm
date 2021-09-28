@@ -78,7 +78,7 @@
                 <td>{{employee[5]}}</td>
                 <td>{{employee[6][0:10]}}</td>
                 <td>{{employee[8]}}</td>
-                <td>{{employee[9].strftime('%d %b %Y')}}</td>
+                <td>{{employee[9]}}</td>
               </tr>
               {% endfor %}
 
@@ -354,8 +354,43 @@
           <h1>Feedback</h1>
           <div class="feedback-section">
             <h2>Feedback Section</h2>
-            <div class="panel-statistics"></div>
-            {{feedback}}
+
+            <div class="panel-statistics">
+              <table>
+                <tr>
+                  <th>Feedback ID.</th>
+                  <th>Customer ID.</th>
+                  <th>Customer Name</th>
+                  <th>Feedback</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+
+                {% for feedback in feedbacks %}
+
+                <tr>
+                  <td>{{feedback[0]}}</td>
+
+                  <td>{{feedback[1]}}</td>
+                  {% for customer in customers %} {% if feedback[1] ==
+                  customer[0] %}
+                  <td>{{customer[1]}} {{customer[2]}}</td>
+                  {% endif %} {% endfor %}
+
+                  <td>{{feedback[2]}}</td>
+
+                  {% if feedback[3] != 0 %}
+                  <td><a href="#">Inactive</a></td>
+                  {% else %}
+                  <td><a href="#">Active</a></td>
+                  {% endif %}
+
+                  <td>{{feedback[4].strftime('%d %b %Y')}}</td>
+                </tr>
+
+                {% endfor %}
+              </table>
+            </div>
             <div class="update-feedback"></div>
           </div>
         </section>
@@ -374,8 +409,8 @@
             {{orders}} <br />
             <h4>Employees</h4>
             {{employees}} <br />
-            <h4>Feedback</h4>
-            {{feedback}} <br />
+            <h4>Feedbacks</h4>
+            {{feedbacks}} <br />
             <h4>Customers</h4>
             {{customers}}
 

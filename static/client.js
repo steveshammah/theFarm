@@ -1,8 +1,6 @@
 const orderButton = document.querySelectorAll(".order-form .btn");
 const username = document.querySelector("#username").innerHTML;
 
-console.log(orderButton);
-
 orderButton.forEach((button) => {
   button.addEventListener("click", (e) => {
     const parentElement = button.parentElement;
@@ -10,30 +8,61 @@ orderButton.forEach((button) => {
     // console.log("Parent Element", parentElement.childNodes[1]);
     const product = parentElement.id;
     const quantity = parentElement.childNodes[1].value;
-    console.log("USERNAME: ", username);
-
-    // console.log("Button", button);
     const productSpan = document.querySelector(`.${product} .order-success`);
     productSpan.style.display = "block";
 
     setTimeout(() => {
       productSpan.style.display = "none";
-      console.log(productSpan);
-    }, 4000);
+    }, 5000);
+    checkOrders(username);
+
+    console.log("PRODUCT: ", product);
     const order = { product, quantity };
-    console.log("SAVING ORDERS");
+    console.log("SAVING ORDERS: ", order);
+    saveOrders(order);
 
     parentElement.childNodes[1].value = "";
-    storeOrder(username, order);
-    console.log("username: ", username, "Order: ", order);
   });
 });
 
-const storeOrder = (username, order) => {
-  localStorage.setItem(username, JSON.stringify(order));
+function checkOrders(username) {
+  //CHECK IF IN STORAGE
+  let orders;
+  if (localStorage.getItem(username) == null) {
+    orders = [];
+    console.log("NO ORDERS FOUND");
+  } else {
+    orders = JSON.parse(localStorage.getItem(username));
+    // console.log("ORDERS: ", orders);
+    return true;
+  }
+}
+
+function saveOrders(orderList) {
+  let orders;
+  if (checkOrders(username)) {
+    orders = JSON.parse(localStorage.getItem(username));
+    console.log("SAVING ORDERS NEW FUNC: ", orders);
+    for (let i = 0; i < orders.length; i++) {
+      console.log(orders[i].product === orderList.product);
+      if (orders[i].product === orderList.product) {
+        console.log("IF EXECUTING");
+        orders[i] = orderList;
+        localStorage.setItem(username, JSON.stringify(orders));
+      } else {
+        orders.push(orderList);
+        console.log("ELSE EXECUTING!!");
+        localStorage.setItem(username, JSON.stringify(orders));
+      }
+    }
+  } else {
+    orders = [];
+    orders.push(orderList);
+    console.log("EXECUTING!!");
+    localStorage.setItem(username, JSON.stringify(orders));
+  }
   updateOrders();
-  return true;
-};
+}
 
 const updateOrders = () => {
   // Dom Elements to update
@@ -46,21 +75,22 @@ const updateOrders = () => {
   const totatCost = document.querySelector(".total-cost");
   const totalQuantity = document.querySelector(".total-quantity");
 
-  const userOrders = localStorage.getItem(username);
-  console.log("USER ORDERS: ", userOrders);
+  // console.log("Username:, ", username);
+  // console.log(localStorage.getItem("janedoe"));
+  // const userOrders = JSON.parse(localStorage.getItem(username));
+  // console.log("USER ORDERS: ", userOrders);
   // const layers = Number(userOrders.products.layers);
-  const broilers = Number(userOrders.products.broilers);
+  // const broilers = userOrders.quantity;
   // const chicks = Number(userOrders.products.chicks);
-  console.log("Layers: ", layers);
+  // console.log("Broilers: ", broilers);
   // const quantitySum = layers + broilers + chicks;
-
   // console.log(layersOrders);
   // totatCost.innerText = costSum;
   // totalQuantity.innerText = quantitySum;
   // layersOrders.innerText = layers;
   // layersAmount.innerText = layers * 400;
-  broilersOrders.innerText = broilers;
-  broilersAmount.innerText = broilers * 600;
+  // broilersOrders.innerText = broilers;
+  // broilersAmount.innerText = broilers * 600;
   // chicksOrders.innerText = chicks;
   // chicksAmount.innerText = chicks * 70;
 };
