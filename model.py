@@ -244,16 +244,15 @@ class User:
             return cursor.fetchall()
 
     # Check if email exists in DB
-    def verify_email(self, email: str):
+    def is_valid_email(self, email: str):
         with DbManager(**DBCONFIG) as cursor:
             SQL = '''SELECT DISTINCT email FROM customers'''
             cursor.execute(SQL)
             emails = cursor.fetchall()
-            for email in emails:
-                if email in emails:
-                    return False
-                else:
-                    return True
+            if email in emails:
+                return False
+            else:
+                return True
 
     # Check if user is active in the system
     def is_active(self, status: str):
@@ -385,7 +384,6 @@ class Admin(User):
         time_string = f'{time}T08::00::00.000000'
         timestamp = datetime.strptime(time_string, '%Y-%m-%dT%H::%M::%S.%f')
         return timestamp
-
 
 
 user = User('admin@theFarm.co.ke')

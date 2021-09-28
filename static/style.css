@@ -308,9 +308,6 @@ footer div {
 }
 .login-container form span input {
   width: 80%;
-  height: 40px;
-  outline: none;
-  padding: 10px 50px;
 }
 
 /* SIGN UP */
@@ -387,8 +384,10 @@ table input {
   padding: 0;
 }
 .form-control {
+  height: 40px;
   width: 120px;
   outline: none;
+  padding: 5px 10px;
   border: 1px solid rgb(128, 128, 128);
 }
 .form-control:focus,

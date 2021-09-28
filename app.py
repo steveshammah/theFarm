@@ -28,8 +28,8 @@ def signup():
         confirm_password = request.form['confirm-password']
         residence = request.form['residence']
         customer = User(email)
-        # print('Customer', customer)
-        if customer.verify_email(email):
+        print('Customer', customer)
+        if customer.is_valid_email(email) == True:
             customer.sign_up(first_name, last_name, email, phone, residence, password, confirm_password)
             print('Creating User')
             if customer.sign_up(first_name, last_name, email, phone, residence, password, confirm_password) == True:
@@ -197,7 +197,7 @@ def customer_login():
             return redirect('customer')
             # return render_template('customer.html', customer_details=customer_details)
         elif customer.log_in(password) == 'Wrong Password':
-            message = 'Wrong password!`'
+            message = 'Wrong password!'
             return render_template('customer-login.html', message=message)
         elif customer.log_in(password) == 'Email Not Found':
             message = 'Email Not Found!'
@@ -213,6 +213,7 @@ def settings(username):
     return render_template('settings.html', user=user_data, username=username)
 
 
+# Customer Profile
 @app.route('/customer')
 def customer():
     try:
@@ -220,8 +221,8 @@ def customer():
         customer_details = User(email).user_details()[0]
         session['customer_id'] = customer_details[0]            # set user ID in session
         session['username'] = customer_details[1]         # set user ID in session
-        print(customer_details)
-        print(session)
+        # print(customer_details)
+        # print(session)
         orders = Admin(email).get_orders_by_id(session['customer_id'])      # Fetch user's orders
         # print('ORDERS', orders == True)
 
@@ -231,7 +232,7 @@ def customer():
             layers = Admin(email).sort_orders('layers', session['customer_id'])
             cocks = Admin(email).sort_orders('cocks', session['customer_id'])
             order_list = [chicks, layers, cocks]
-            print('ORDER LIST: ', order_list)
+            # print('ORDER LIST: ', order_list)
             return render_template('customer.html', customer_details=customer_details, orders=orders, order_list=order_list)
         else:
             return render_template('customer.html', customer_details=customer_details, orders=orders)
@@ -243,24 +244,16 @@ def customer():
         return render_template('customer.html', customer_details=customer_details)
 
 
-@app.route('/order/<string:product_name>', methods=['POST', 'GET'])
-def order(product_name):
-    order_details = product_name
-    count = request.form['count']
-    print(order_details, count)
-    customer_id = session['customer_id']
-    admin = Admin('admin@theFarm.co.ke')
-    admin.place_order(customer_id, order_details, count)
-    email = session['email']
-    customer_details = User(email).user_details()[0]
-    session['customer_id'] = customer_details[0]  # SESSION USER ID SET
-    orders = Admin(email).orders_by_id(session['customer_id'])
-    message = 'ORDER HAS BEEN PLACED!'
-    return render_template('customer.html', customer_details=customer_details, orders=orders, message=message)
+# Place Order
+@app.route('/orders/checkout', methods=['POST', 'GET'])
+def place_order():
+    order = []
+    return redirect(url_for('my_orders'))
 
 
-@app.route('/<string:username>/orders', methods=['GET', 'POST'])
-def my_orders(username):
+# User Orders Page
+@app.route('/myorders', methods=['GET', 'POST'])
+def my_orders():
     try:
         if request.method == 'GET':
             customer_email = session['email']
@@ -270,12 +263,12 @@ def my_orders(username):
             orders = customer.get_orders_by_id(customer_id)
             print(orders)
             return render_template('customer-orders.html', orders=orders, username=username)
-
         else:
             pass
     except KeyError:
         return redirect('employee_login')
 
 
+# Run app
 if __name__ == '__main__':
     app.run(debug=True, port=7070)

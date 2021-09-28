@@ -26,15 +26,13 @@
 
     <ul class="user-nav">
       <li>
-        <a href="/customer">
+        <a href="/customer" id="username">
           {{customer_details[1][0]}} {{customer_details[2]}}
         </a>
         <div class="online"></div>
       </li>
       <li>
-        <a href="/{{customer_details[1]}}{{customer_details[2]}}/orders"
-          >Cart/Orders</a
-        >
+        <a href="/myorders">Cart/Orders</a>
       </li>
       <li>
         <a href="/{{customer_details[1]}}{{customer_details[2]}}/settings"
@@ -119,11 +117,7 @@
           {%endfor %}
 
           <button class="btn">
-            <a
-              href="/{{customer_details[1]}}{{customer_details[2]}}/orders#history"
-            >
-              View History</a
-            >
+            <a href="/myorders#history"> View History</a>
           </button>
         </div>
       </div>
@@ -156,7 +150,7 @@
             <div class="chicken-details">
               <span class="order-success">
                 <strong>Order has been placed!</strong> <br />
-                <i><a href="/user/orders">Checkout</a></i>
+                <i><a href="/myorders">Checkout</a></i>
               </span>
               <span class="order-form">
                 <form action="" id="broilers" method="POST">
@@ -196,7 +190,7 @@
             <div class="chicken-details">
               <span class="order-success">
                 <strong>Order has been placed!</strong> <br />
-                <i><a href="/user/orders">Checkout</a></i>
+                <i><a href="/myorders">Checkout</a></i>
               </span>
               <span class="order-form">
                 <form action="" id="layers" method="POST">
@@ -236,7 +230,7 @@
             <div class="chicken-details">
               <span class="order-success">
                 <strong>Order has been placed!</strong> <br />
-                <i><a href="/user/orders">Checkout</a></i>
+                <i><a href="/myorders">Checkout</a></i>
               </span>
               <span class="order-form">
                 <form action="" id="chicks" method="POST">
