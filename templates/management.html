@@ -311,7 +311,7 @@
                 <th>Order No.</th>
                 <th>Customer No.</th>
                 <th>Product Name</th>
-                <th>Count</th>
+                <th>Quantity</th>
                 <th>Cost</th>
                 <th>Date</th>
                 <th>Status</th>
@@ -328,7 +328,8 @@
                 <td>{{order[2]}}</td>
                 <td>{{order[3]}}</td>
                 <td>{{order[4]}}</td>
-                <td>Pending</td>
+                <td>{{order[4].strftime('%d %b %Y')}}</td>
+                <td>{{order[5]}}</td>
               </tr>
 
               {% endfor %}
@@ -362,6 +363,7 @@
                   <th>Customer ID.</th>
                   <th>Customer Name</th>
                   <th>Feedback</th>
+                  <th>Location</th>
                   <th>Status</th>
                   <th>Date</th>
                 </tr>
@@ -378,6 +380,7 @@
                   {% endif %} {% endfor %}
 
                   <td>{{feedback[2]}}</td>
+                  <td>{{feedback[3]}}</td>
 
                   {% if feedback[3] != 0 %}
                   <td><a href="#">Inactive</a></td>
@@ -385,7 +388,7 @@
                   <td><a href="#">Active</a></td>
                   {% endif %}
 
-                  <td>{{feedback[4].strftime('%d %b %Y')}}</td>
+                  <td>{{feedback[5].strftime('%d %b %Y')}}</td>
                 </tr>
 
                 {% endfor %}

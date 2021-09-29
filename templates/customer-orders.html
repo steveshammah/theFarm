@@ -40,72 +40,73 @@
     <section class="my-orders-container">
       <div class="pending-orders">
         <h2>Pending Orders</h2>
+        <form action="orders/checkout" method="POST">
+          <div class="cart-container">
+            <div class="cart-item">
+              <img src="../static/resources/chicken-farm-1.jpg" alt="Layers" />
+              <div class="order-meta">
+                <span>
+                  <h4>Layers</h4>
+                  <input type="text" class="layers-orders" name="layers" />
+                </span>
+                <span>
+                  <h4>Amount</h4>
+                  <i class="layers-amount"></i>
+                </span>
+                <span>
+                  <a href="#">X</a>
+                </span>
+              </div>
+            </div>
 
-        <div class="cart-container">
-          <div class="cart-item">
-            <img src="../static/resources/chicken-farm-1.jpg" alt="Layers" />
-            <div class="order-meta">
-              <span>
-                <h4>Layers</h4>
-                <i class="layers-orders"></i>
-              </span>
-              <span>
-                <h4>Amount</h4>
-                <i class="layers-amount"></i>
-              </span>
-              <span>
-                <a href="#">X</a>
-              </span>
+            <div class="cart-item">
+              <img src="../static/resources/cock-1.jpg" alt="Broilers" />
+              <div class="order-meta">
+                <span>
+                  <h4>Broilers</h4>
+                  <input type="text" class="broilers-orders" name="broilers" />
+                </span>
+                <span>
+                  <h4>Amount</h4>
+                  <i class="broilers-amount"></i>
+                </span>
+                <span>
+                  <a href="#">X</a>
+                </span>
+              </div>
             </div>
-          </div>
 
-          <div class="cart-item">
-            <img src="../static/resources/cock-1.jpg" alt="Broilers" />
-            <div class="order-meta">
-              <span>
-                <h4>Broilers</h4>
-                <i class="broilers-orders"></i>
-              </span>
-              <span>
-                <h4>Amount</h4>
-                <i class="broilers-amount"></i>
-              </span>
-              <span>
-                <a href="#">X</a>
-              </span>
+            <div class="cart-item">
+              <img src="../static/resources/chick.jpg" alt="Chicks" />
+              <div class="order-meta">
+                <span>
+                  <h4>Chicks</h4>
+                  <input type="text" class="chicks-orders" name="chicks" />
+                </span>
+                <span>
+                  <h4>Amount</h4>
+                  <i class="chicks-amount"></i>
+                </span>
+                <span>
+                  <a href="#">X</a>
+                </span>
+              </div>
+            </div>
+            <div class="totals-meta">
+              <div class="order-totals">
+                <span>
+                  <h4>Quantity:</h4>
+                  <i class="total-quantity"></i>
+                </span>
+                <span>
+                  <h4>Total Price:</h4>
+                  <i class="total-cost"></i>
+                </span>
+              </div>
+              <button class="btn checkout">Checkout</button>
             </div>
           </div>
-
-          <div class="cart-item">
-            <img src="../static/resources/chick.jpg" alt="Chicks" />
-            <div class="order-meta">
-              <span>
-                <h4>Chicks</h4>
-                <i class="chicks-orders"></i>
-              </span>
-              <span>
-                <h4>Amount</h4>
-                <i class="chicks-amount"></i>
-              </span>
-              <span>
-                <a href="#">X</a>
-              </span>
-            </div>
-          </div>
-          <div class="totals-meta">
-            <div class="order-totals">
-              <span>
-                <h4>Quantity:</h4>
-                <i class="total-quantity"></i>
-              </span>
-              <span>
-                <h4>Total Price:</h4>
-                <i class="total-cost"></i>
-              </span>
-            </div>
-            <button class="btn"><a href="/orders/checkout">Checkout</a></button>
-          </div>
-        </div>
+        </form>
       </div>
     </section>
     <section class="orders-history" id="history">

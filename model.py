@@ -344,14 +344,14 @@ class Admin(User):
 
     def sort_orders(self, product: str, customer_id: int):
         with DbManager(**DBCONFIG) as cursor:
-            product_sql = '''SELECT sum(count) FROM orders WHERE order_item = %s and customer_id = %s'''
+            product_sql = '''SELECT sum(quantity) FROM orders WHERE order_item = %s and customer_id = %s'''
             cursor.execute(product_sql, (product, customer_id))
             return cursor.fetchall()
 
-    def place_order(self, customer_id: int, order_details: str, count: int):
+    def place_order(self, customer_id: int, order_item: str, quantity: int):
         with DbManager(**DBCONFIG) as cursor:
-            order_details_sql = '''INSERT INTO orders (customer_id, order_item, count) VALUES(%s, %s, %s)'''
-            cursor.execute(order_details_sql, (customer_id, order_details, count))
+            order_details_sql = '''INSERT INTO orders (customer_id, order_item, quantity) VALUES(%s, %s, %s)'''
+            cursor.execute(order_details_sql, (customer_id, order_item, quantity))
 
     def flock_table(self):
         with DbManager(**DBCONFIG) as cursor:
@@ -373,11 +373,11 @@ class Admin(User):
             brooder_data = cursor.fetchall()
             return brooder_data
 
-    def save_feedback(self, customer_id, content):
+    def save_feedback(self, customer_id, content, location):
         with DbManager(**DBCONFIG) as cursor:
-            SQL = '''INSERT INTO feedback (customer_id, feedback_details) VALUES (%s, %s)'''
+            SQL = '''INSERT INTO feedback (customer_id, feedback_details, location) VALUES (%s, %s, %s)'''
             print('FEEDBACK LOGGED')
-            cursor.execute(SQL, (customer_id, content))
+            cursor.execute(SQL, (customer_id, content, location))
             return True
 
     def feedback_table(self):

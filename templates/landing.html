@@ -122,7 +122,9 @@
         {% for feedback in feedbacks %}
         <div class="review">
           <p>{{feedback[2]}}.</p>
-          <span>{{feedback[4].strftime('%d %b %Y')}}</span>
+          <span
+            >{{feedback[5].strftime('%d %b %Y')}} | {{feedback[3]}}, Kenya
+          </span>
         </div>
         {% endfor %}
       </div>

@@ -1,5 +1,3 @@
-// import {User} from './client.js';
-
 const burgerNav = document.querySelector(".burger");
 const navBar = document.querySelector("nav");
 const navList = document.querySelector(".nav-list");
@@ -9,9 +7,7 @@ const body = document.querySelectorAll("section");
 // MANAGEMENT PAGE
 const updateBrooder = document.querySelectorAll(".update-brooder");
 
-// console.log(updateBrooder)
 
-// EVENT LISTENERS
 
 try {
   burgerNav.addEventListener("click", () => {

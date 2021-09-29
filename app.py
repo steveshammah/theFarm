@@ -8,10 +8,10 @@ app.secret_key = 'thesecretkey'
 
 @app.route('/')
 def home():
+    admin = Admin('guest@theFarm.co.ke')
+    feedbacks = admin.feedback_table()[::-1]
     try:
         user_email = session['email']
-        admin = Admin('guest@theFarm.co.ke')
-        feedbacks = admin.feedback_table()[::-1]
         if '@theFarm.co.ke' in user_email:
             return render_template('landing.html', employee_email=user_email, feedbacks=feedbacks)
         else:
@@ -57,6 +57,7 @@ def employee_login():
     if request.method == 'GET':
         session.pop('email', None)
         session.pop('employee_id', None)
+        session.pop('username', None)
         return render_template('employee-login.html')
     else:
         email = request.form['email']
@@ -72,6 +73,7 @@ def employee_login():
             # print('EMPLOYEE DETAILS: ', employee_details)
             session['email'] = email
             session['employee_id'] = employee_details[2]
+            session['username'] = email.split('@')[0]
             # print('USER ID IN SESSION', session['employee_id'])
             # orders = Admin(email).orders_by_id(session['user_id'])
             return redirect('employee')
@@ -187,6 +189,7 @@ def customer_login():
     if request.method == 'GET':
         session.pop('email', None)
         session.pop('customer_id', None)
+        session.pop('username', None)
         return render_template('customer-login.html')
     else:
         email = request.form['email']
@@ -251,8 +254,24 @@ def customer():
 # Place Order
 @app.route('/orders/checkout', methods=['POST', 'GET'])
 def place_order():
-    order = []
-    return redirect(url_for('my_orders'))
+    try:
+        customer_id = session['customer_id']
+        customer_email = session['email']
+        broilers_count = request.form['broilers']
+        layers_count = request.form['layers']
+        chicks_count = request.form['chicks']
+        if broilers_count:
+            Admin(customer_email).place_order(customer_id, 'Broilers', broilers_count)
+        if layers_count:
+            Admin(customer_email).place_order(customer_id, 'Layers', layers_count)
+        if chicks_count:
+            Admin(customer_email).place_order(customer_id, 'Chicks', chicks_count)
+
+        print('Orders: ', broilers_count, layers_count, chicks_count)
+        order = []
+        return redirect(url_for('my_orders'))
+    except KeyError:
+        return redirect(url_for('login'))
 
 
 # User Orders Page
@@ -274,13 +293,14 @@ def my_orders():
 
 
 # User Feedback
-@app.route('/feedback', methods=['POST'])
-def feedback():
+@app.route('/feedback/<string:location>', methods=['POST'])
+def feedback(location):
     customer_email = session['email']
     customer_id = session['customer_id']
     content = request.form['feedback-content']
+    location = location
     customer = Admin(customer_email)
-    customer.save_feedback(customer_id, content)
+    customer.save_feedback(customer_id, content, location)
     return redirect(url_for('customer'))
 
 

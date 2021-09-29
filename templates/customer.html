@@ -43,58 +43,60 @@
       <div class="user-details">
         <div class="profile-container">
           <div class="user-info">
-            <h3>User Information</h3>
+            <h2>User Information</h2>
             <br />
             <span>
-              <small id="username"
-                >{{customer_details[1]}} {{customer_details[2]}}</small
+              <strong id="username"
+                >{{customer_details[1]}} {{customer_details[2]}}</strong
               ></span
             >
             <span
-              ><small id="email">{{customer_details[3]}}</small>
-              &nbsp;&nbsp;<small id="phone"
-                >{{customer_details[4]}}</small
-              ></span
+              ><small id="email">{{customer_details[3]}}</small> <br />
+              <small id="phone">{{customer_details[4]}}</small></span
             >
             <span> <small id="location">{{customer_details[6]}}</small></span>
-            <button class="btn">
-              <a href="#"> Edit profile </a>
-            </button>
+            <button class="btn edit-profile">Edit</button>
           </div>
-          <div class="profile-settings settings-active">
-            <h3>Settings</h3>
+          <div class="profile-settings">
+            <h3>Edit Profile</h3>
             <br />
             <span>
               <strong>Name: </strong>
               <input
                 class="username"
                 value="{{customer_details[1]}} {{customer_details[2]}}"
+                required
             /></span>
 
             <span>
               <strong>Email: </strong>
-              <input class="email" value="{{customer_details[3]}}" type="email"
+              <input
+                class="email"
+                value="{{customer_details[3]}}"
+                type="email"
+                required
             /></span>
 
             <span>
               <strong>Phone: </strong>
-              <input class="phone" value="{{customer_details[4]}}" type="text"
+              <input
+                class="phone"
+                value="{{customer_details[4]}}"
+                type="text"
+                required
             /></span>
 
             <span>
               <strong>Location: </strong>
               <input
                 class="location-data"
-                placeholder="{{customer_details[6]}}"
+                value="{{customer_details[6]}}"
                 type="text"
+                required
             /></span>
             <span>
-              <button class="btn">
-                <a href="#"> Save </a>
-              </button>
-              <button class="btn">
-                <a href="#"> Cancel </a>
-              </button>
+              <a href="#"><button class="btn">Save</button></a>
+              <button class="btn edit-profile">Cancel</button>
             </span>
           </div>
         </div>
@@ -105,7 +107,6 @@
             ><strong>Pending:</strong> <small class="total-quantity"></small
           ></span>
           <span><strong>Cost: </strong><small class="total-cost"></small></span>
-          <span><strong>Delivered: </strong><small>17</small></span>
           <!-- {{orders}} -->
           {%for order in orders%}
           <span
@@ -255,12 +256,13 @@
         <hr />
       </span>
       <h2>Drop us a note.</h2>
-      <form action="/feedback" method="POST">
+      <form action="/feedback/{{customer_details[6]}}" method="POST">
         <!-- <input type="email" name="" id="" placeholder="Email*" class="form-control"> -->
         <!-- <input type="text" name="" id="" placeholder="Name" class="form-control"> -->
         <textarea
           placeholder="What's on your mind..."
           name="feedback-content"
+          required
         ></textarea>
         <!-- <input type="text" name="" id="" placeholder="Phone*" class="form-control"> -->
         <button class="btn">SEND</button>
